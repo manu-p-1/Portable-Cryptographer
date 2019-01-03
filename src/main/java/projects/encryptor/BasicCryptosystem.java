@@ -1,4 +1,4 @@
-package projects.encrpytor;
+package projects.encryptor;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

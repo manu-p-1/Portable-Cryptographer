@@ -20,9 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import projects.encrpytor.BasicCryptosystem;
-import projects.encrpytor.Cryptographer;
+import projects.encryptor.BasicCryptosystem;
+import projects.encryptor.Cryptographer;
 
 public class EncryptActionGUI {
 
@@ -114,20 +113,30 @@ public class EncryptActionGUI {
 		
 		HBox buttonUtils = new HBox(5);
 		Button copy = new Button("Copy Result To Clipboard");
+		Button paste = new Button("Paste From Clipboard");
 		Button reset = new Button("Reset");
 		reset.setPrefSize(100, 50);
-		copy.setPrefSize(200, 50);
-		buttonUtils.getChildren().addAll(copy, reset);
+		copy.setPrefSize(175, 50);
+		paste.setPrefSize(175, 50);
+		buttonUtils.getChildren().addAll(copy, paste, reset);
 		buttonBar.setLeft(buttonUtils);	
 		
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+	    final ClipboardContent content = new ClipboardContent();
 		copy.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				final Clipboard clipboard = Clipboard.getSystemClipboard();
-			    final ClipboardContent content = new ClipboardContent();
-			    content.putString(taEncryptedResult.getText());
+				content.putString(taEncryptedResult.getText());
 			    clipboard.setContent(content);
 			    copy.setText("Copied!");
+			}
+		});
+		
+		paste.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			    taPlainText.setText(clipboard.getString());
+			    paste.setText("Pasted!");
 			}
 		});
 			
@@ -135,6 +144,7 @@ public class EncryptActionGUI {
 			 taPlainText.setText("Enter Text:");
 			 taEncryptedResult.setText("Result:");
 			 copy.setText("Copy Result To Clipboard");
+			 paste.setText("Paste From Clipboard");
 		});
 		
 		encrypt.setOnAction(new EventHandler<ActionEvent>() {
@@ -150,5 +160,9 @@ public class EncryptActionGUI {
 			}
 		});	
 		return buttonBar;
+	}
+	
+	private void alert() {
+		
 	}
 }

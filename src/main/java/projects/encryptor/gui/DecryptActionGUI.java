@@ -20,9 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import projects.encrpytor.BasicCryptosystem;
-import projects.encrpytor.Cryptographer;
+import projects.encryptor.BasicCryptosystem;
+import projects.encryptor.Cryptographer;
 
 public class DecryptActionGUI {
 

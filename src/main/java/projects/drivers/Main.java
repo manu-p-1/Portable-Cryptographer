@@ -9,7 +9,7 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import projects.encrpytor.Cryptographer;
+import projects.encryptor.Cryptographer;
 
 public class Main {
 
