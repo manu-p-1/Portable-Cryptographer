@@ -30,7 +30,7 @@ import projects.encryptor.Cryptographer;
 public class CryptographerGUI extends Application {
 
 	private final VBox root = new VBox();
-	private BasicCryptosystem encrpytable;
+	private BasicCryptosystem basicCryptosystem;
 	private TextArea taPlainText;
 	private TextArea taCrypticResult;
 	private Button cryptosystemVariable;
@@ -40,7 +40,7 @@ public class CryptographerGUI extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			encrpytable = new Cryptographer();
+			basicCryptosystem = new Cryptographer();
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
 			e.printStackTrace();
 		}
@@ -48,6 +48,7 @@ public class CryptographerGUI extends Application {
 		root.getChildren().add(loadMenubar(stage));
 		root.getChildren().add(loadTextArea());
 		root.getChildren().add(loadButtonBar());
+		root.setStyle("-fx-background-color: linear-gradient(to bottom, #595959, #999999);");
 		Scene scene = new Scene(root);
 		stage.setTitle("Portable Cryptographer");
 		stage.setScene(scene);
@@ -100,6 +101,8 @@ public class CryptographerGUI extends Application {
 			Platform.exit();
 			System.exit(0);
 		});	
+		menuBar.setStyle(
+				"-fx-background-color: linear-gradient(to bottom, #808080, #999999)");
 		return menuBar;
 	}
 	
@@ -174,10 +177,10 @@ public class CryptographerGUI extends Application {
 			public void handle(ActionEvent arg0) {
 				try {
 					if(isEncryptMode) {
-						String encryptedResult = encrpytable.encrypt(taPlainText.getText());
+						String encryptedResult = basicCryptosystem.encrypt(taPlainText.getText());
 						taCrypticResult.setText(encryptedResult);
 					} else {
-						String decryptedResult = encrpytable.decrypt(taPlainText.getText());
+						String decryptedResult = basicCryptosystem.decrypt(taPlainText.getText());
 						taCrypticResult.setText(decryptedResult);
 					}
 					copy.setText("Copy Result To Clipboard");
