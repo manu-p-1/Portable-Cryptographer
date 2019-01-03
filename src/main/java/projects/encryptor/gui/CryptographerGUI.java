@@ -48,7 +48,7 @@ public class CryptographerGUI extends Application {
 		root.getChildren().add(loadMenubar(stage));
 		root.getChildren().add(loadTextArea());
 		root.getChildren().add(loadButtonBar());
-		root.setStyle("-fx-background-color: linear-gradient(to bottom, #595959, #999999);");
+		root.setStyle("-fx-background-color: linear-gradient(#999999, #595959, #999999);");
 		Scene scene = new Scene(root);
 		stage.setTitle("Portable Cryptographer");
 		stage.setScene(scene);
@@ -71,7 +71,7 @@ public class CryptographerGUI extends Application {
 				decrypt.setSelected(false);
 				Platform.runLater(() -> {
 					taPlainText.setText("Enter Text:");
-					taCrypticResult.setText("Result");
+					taCrypticResult.setText("Result:");
 					cryptosystemVariable.setText("Encrypt");
 				});
 			}
@@ -83,7 +83,7 @@ public class CryptographerGUI extends Application {
 				encrypt.setSelected(false);
 				Platform.runLater(() -> {
 					taPlainText.setText("Enter Encrypted Text:");
-					taCrypticResult.setText("Result");
+					taCrypticResult.setText("Result:");
 					cryptosystemVariable.setText("Decrypt");
 				});
 			}
@@ -143,7 +143,7 @@ public class CryptographerGUI extends Application {
 		buttonBar.setRight(relaventButtons);
 		
 		HBox buttonUtils = new HBox(5);
-		Button copy = new Button("Copy Result To Clipboard");
+		Button copy = new Button("Copy Result");
 		Button paste = new Button("Paste From Clipboard");
 		Button reset = new Button("Reset");
 		reset.setPrefSize(100, 50);
@@ -169,7 +169,7 @@ public class CryptographerGUI extends Application {
 		reset.setOnAction(event -> {
 			 taPlainText.setText("Enter Text:");
 			 taCrypticResult.setText("Result:");
-			 copy.setText("Copy Result To Clipboard");
+			 copy.setText("Copy Result");
 			 paste.setText("Paste From Clipboard");
 		});
 		cryptosystemVariable.setOnAction(new EventHandler<ActionEvent>() {
@@ -183,7 +183,7 @@ public class CryptographerGUI extends Application {
 						String decryptedResult = basicCryptosystem.decrypt(taPlainText.getText());
 						taCrypticResult.setText(decryptedResult);
 					}
-					copy.setText("Copy Result To Clipboard");
+					copy.setText("Copy Result");
 					paste.setText("Paste From Clipboard");
 				} catch (Exception e) {
 					alert(taPlainText.getText());
