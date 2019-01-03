@@ -8,11 +8,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.BorderPane;
@@ -130,22 +132,19 @@ public class DecryptActionGUI {
 			    copy.setText("Copied!");
 			}
 		});
-		
 		paste.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 			    taPlainText.setText(clipboard.getString());
 			    paste.setText("Pasted!");
 			}
-		});
-			
+		});		
 		reset.setOnAction(event -> {
 			 taPlainText.setText("Enter Encrypted Text:");
 			 taEncryptedResult.setText("Result:");
 			 copy.setText("Copy Result To Clipboard");
 			 paste.setText("Paste From Clipboard");
-		});
-		
+		});	
 		encrypt.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -154,14 +153,19 @@ public class DecryptActionGUI {
 					taEncryptedResult.setText(encryptedResult);
 					copy.setText("Copy Result To Clipboard");
 				} catch (Exception e) {
-					e.printStackTrace();
+					alert(taPlainText.getText());
 				}
 			}
 		});	
 		return buttonBar;
 	}
 	
-	private void alert() {
-		
+	private void alert(String expression) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText("Invalid Entry");
+		alert.setContentText("\"" + expression + "\""
+				+ " is not a valid entry.");
+		alert.showAndWait();
 	}
 }

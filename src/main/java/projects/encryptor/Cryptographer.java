@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 public class Cryptographer implements BasicCryptosystem {
 	
 	private boolean isEncrpyted;
-    private final String key = "2s5v8x/A?D(G+KbPeShVmYq3t6w9z$B&"; // 128 bit key
+    private final String key = "2s5v8x/A?D(G+KbPeShVmYq3t6w9z$B&"; //Randomly generated keys to come later
     private Key aesKey;
     private Cipher cipher;
 

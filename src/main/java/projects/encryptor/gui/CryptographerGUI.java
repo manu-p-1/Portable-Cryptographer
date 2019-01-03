@@ -1,76 +1,205 @@
 package projects.encryptor.gui;
 
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.NoSuchPaddingException;
+
 import javafx.application.Application;
 import javafx.application.Platform;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import projects.encryptor.BasicCryptosystem;
+import projects.encryptor.Cryptographer;
 
 public class CryptographerGUI extends Application {
-	
-	private Stage stage;
-	private final VBox root = new VBox();						
+
+	private final VBox root = new VBox();
+	private BasicCryptosystem encrpytable;
+	private TextArea taPlainText;
+	private TextArea taCrypticResult;
+	private Button cryptosystemVariable;
+	private final static int DEFAULT_BORDER_INSET_SPACING = 20;
+	private boolean isEncryptMode = true;
 	
 	@Override
 	public void start(Stage stage) {
-		this.stage = stage;
-		root.setPrefSize(500, 300);
-		root.getChildren().addAll(loadMenubar());
-		root.getChildren().add(loadContents());
+		try {
+			encrpytable = new Cryptographer();
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+			e.printStackTrace();
+		}
+		root.setPrefSize(900, 700);
+		root.getChildren().add(loadMenubar(stage));
+		root.getChildren().add(loadTextArea());
+		root.getChildren().add(loadButtonBar());
 		Scene scene = new Scene(root);
-		stage.setResizable(false);
 		stage.setTitle("Portable Cryptographer");
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.sizeToScene();
-		stage.show();		
+		stage.show();	
 	}
-
-	private MenuBar loadMenubar() {
+	
+	private MenuBar loadMenubar(Stage stage) {
 		final MenuBar menuBar = new MenuBar();
-		final Menu menu1 = new Menu("File");
+		final Menu $fileMenu = new Menu("File");
 		final MenuItem fileExit = new MenuItem("Exit");
-		final Menu menu4 = new Menu("Help");
+		final Menu $modeMenu = new Menu("Mode");
+		final CheckMenuItem encrypt = new CheckMenuItem("Encrypt");
+		final CheckMenuItem decrypt = new CheckMenuItem("Decrypt");	
+		encrypt.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				isEncryptMode = true;
+				decrypt.setSelected(false);
+				Platform.runLater(() -> {
+					taPlainText.setText("Enter Text:");
+					taCrypticResult.setText("Result");
+					cryptosystemVariable.setText("Encrypt");
+				});
+			}
+		});
+		decrypt.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				isEncryptMode = false;
+				encrypt.setSelected(false);
+				Platform.runLater(() -> {
+					taPlainText.setText("Enter Encrypted Text:");
+					taCrypticResult.setText("Result");
+					cryptosystemVariable.setText("Decrypt");
+				});
+			}
+		});	
+		encrypt.setSelected(true);
+		final Menu $helpMenu = new Menu("Help");
 		final MenuItem helpAbout = new MenuItem("About");
-		menuBar.getMenus().addAll(menu1, menu4);
+		menuBar.getMenus().addAll($fileMenu, $modeMenu, $helpMenu);
 		// Adds the MenuItem's to all Menu's
-		menu1.getItems().add(fileExit);
-		menu4.getItems().add(helpAbout);
+		$fileMenu.getItems().add(fileExit);
+		$modeMenu.getItems().addAll(encrypt, decrypt);
+		$helpMenu.getItems().add(helpAbout);
 		// Adds the menuBar to the VBox root
 		fileExit.setOnAction(event -> {
 			Platform.exit();
 			System.exit(0);
 		});	
 		return menuBar;
-//		helpAbout.setOnAction(event -> about());
 	}
 	
-	private HBox loadContents() {
-		HBox contentPane = new HBox(10);
-		Button encrypt = new Button("Encrpyt");
-		encrypt.setStyle("-fx-font-size: 30");
-		encrypt.setPrefSize(200, 200);
-		Button decrypt = new Button("Decrypt");
-		decrypt.setStyle("-fx-font-size: 30");
-		decrypt.setPrefSize(200, 200);
-		contentPane.getChildren().addAll(encrypt, decrypt);
-		contentPane.setAlignment(Pos.CENTER);
-		contentPane.setPadding(new Insets(30));
-		buttonActions(encrypt, decrypt); // Initiates the button actions for the games
-		return contentPane;
+	private VBox loadTextArea() {
+		taPlainText = new TextArea("Enter Text:");
+		taPlainText.setPrefSize(800, 300);
+		taPlainText.setFocusTraversable(false);
+		taPlainText.setWrapText(true);
+		taPlainText.setStyle("-fx-font-size: 22");
+		taCrypticResult = new TextArea("Result:");
+		taCrypticResult.setPrefSize(800, 250);
+		taCrypticResult.setEditable(false);
+		taCrypticResult.setFocusTraversable(false);
+		taCrypticResult.setWrapText(true);
+		taCrypticResult.setStyle("-fx-font-size: 22");
+		
+		VBox textContent = new VBox(10);
+		textContent.setPadding(new Insets(DEFAULT_BORDER_INSET_SPACING));
+		textContent.getChildren().addAll(taPlainText, taCrypticResult);
+	
+		taPlainText.setOnMouseClicked(event -> {
+			if(taPlainText.getText().equals("Enter Text:") || 
+					taPlainText.getText().equals("Enter Encrypted Text:")) {
+				taPlainText.setText("");
+			}
+		});
+		return textContent;
 	}
 	
-	private void buttonActions(Button encrypt, Button decrypt) {
-		encrypt.setOnAction(e -> new EncryptActionGUI(stage).start());
-		decrypt.setOnAction(e -> new DecryptActionGUI(stage).start());
+	private BorderPane loadButtonBar() {
+		BorderPane buttonBar = new BorderPane();
+		buttonBar.setPrefWidth(800);
+		buttonBar.setPadding(new Insets(DEFAULT_BORDER_INSET_SPACING));
+		HBox relaventButtons = new HBox(5);	
+		cryptosystemVariable = new Button("Encrypt");
+		cryptosystemVariable.setPrefSize(100, 50);
+		relaventButtons.getChildren().add(cryptosystemVariable);
+		buttonBar.setRight(relaventButtons);
+		
+		HBox buttonUtils = new HBox(5);
+		Button copy = new Button("Copy Result To Clipboard");
+		Button paste = new Button("Paste From Clipboard");
+		Button reset = new Button("Reset");
+		reset.setPrefSize(100, 50);
+		copy.setPrefSize(175, 50);
+		paste.setPrefSize(175, 50);
+		buttonUtils.getChildren().addAll(copy, paste, reset);
+		buttonBar.setLeft(buttonUtils);		
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+	    final ClipboardContent content = new ClipboardContent();
+		copy.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				content.putString(taCrypticResult.getText());
+			    clipboard.setContent(content);
+			    copy.setText("Copied!");
+			}
+		});		
+		paste.setOnAction(event -> {
+			    taPlainText.setText(clipboard.getString());
+			    paste.setText("Pasted!");
+			}
+		);		
+		reset.setOnAction(event -> {
+			 taPlainText.setText("Enter Text:");
+			 taCrypticResult.setText("Result:");
+			 copy.setText("Copy Result To Clipboard");
+			 paste.setText("Paste From Clipboard");
+		});
+		cryptosystemVariable.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					if(isEncryptMode) {
+						String encryptedResult = encrpytable.encrypt(taPlainText.getText());
+						taCrypticResult.setText(encryptedResult);
+					} else {
+						String decryptedResult = encrpytable.decrypt(taPlainText.getText());
+						taCrypticResult.setText(decryptedResult);
+					}
+					copy.setText("Copy Result To Clipboard");
+					paste.setText("Paste From Clipboard");
+				} catch (Exception e) {
+					alert(taPlainText.getText());
+				}
+			}
+		});	
+		return buttonBar;
 	}
-
+	
+	private void alert(String expression) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText("Invalid Entry");
+		alert.setContentText("\"" + expression + "\""
+				+ " is not a valid entry.");
+		alert.showAndWait();
+	}
+	
 	public static void main(String[] args) {
 		try {
 			Application.launch(args);
