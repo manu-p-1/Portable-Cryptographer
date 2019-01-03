@@ -16,16 +16,14 @@ import javafx.stage.Stage;
 public class CryptographerGUI extends Application {
 	
 	private Stage stage;
-	private final MenuBar menuBar = new MenuBar();
 	private final VBox root = new VBox();						
 	
 	@Override
 	public void start(Stage stage) {
 		this.stage = stage;
 		root.setPrefSize(500, 300);
-		loadMenubar();
+		root.getChildren().addAll(loadMenubar());
 		root.getChildren().add(loadContents());
-
 		Scene scene = new Scene(root);
 		stage.setResizable(false);
 		stage.setTitle("Portable Cryptographer");
@@ -34,7 +32,8 @@ public class CryptographerGUI extends Application {
 		stage.show();		
 	}
 
-	private void loadMenubar() {
+	private MenuBar loadMenubar() {
+		final MenuBar menuBar = new MenuBar();
 		final Menu menu1 = new Menu("File");
 		final MenuItem fileExit = new MenuItem("Exit");
 		final Menu menu4 = new Menu("Help");
@@ -44,11 +43,11 @@ public class CryptographerGUI extends Application {
 		menu1.getItems().add(fileExit);
 		menu4.getItems().add(helpAbout);
 		// Adds the menuBar to the VBox root
-		root.getChildren().addAll(menuBar);
 		fileExit.setOnAction(event -> {
 			Platform.exit();
 			System.exit(0);
 		});	
+		return menuBar;
 //		helpAbout.setOnAction(event -> about());
 	}
 	

@@ -26,7 +26,7 @@ import projects.encryptor.Cryptographer;
 public class EncryptActionGUI {
 
 	private Stage crptographerGUI;
-	private VBox root;
+	private final VBox root = new VBox();
 	private BasicCryptosystem encrpytable;
 	private TextArea taPlainText;
 	private TextArea taEncryptedResult;
@@ -39,7 +39,6 @@ public class EncryptActionGUI {
 			e.printStackTrace();
 		}
 		this.crptographerGUI = stage;
-		root = new VBox();
 	}
 	
 	public void start() {

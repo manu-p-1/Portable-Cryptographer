@@ -7,7 +7,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
@@ -16,6 +15,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -26,8 +26,11 @@ import projects.encryptor.Cryptographer;
 public class DecryptActionGUI {
 
 	private Stage crptographerGUI;
-	private VBox root;
+	private final VBox root = new VBox();
 	private BasicCryptosystem encrpytable;
+	private TextArea taPlainText;
+	private TextArea taEncryptedResult;
+	private final static int DEFAULT_BORDER_INSET_SPACING = 20;
 	
 	public DecryptActionGUI(Stage stage) {
 		try {
@@ -36,18 +39,18 @@ public class DecryptActionGUI {
 			e.printStackTrace();
 		}
 		this.crptographerGUI = stage;
-		root = new VBox();
 	}
 	
 	public void start() {
 		Stage stage = new Stage();
 		root.setPrefSize(900, 700);
 		
-		loadMenubar(stage);
-		loadTextArea();
+		root.getChildren().add(loadMenubar(stage));
+		root.getChildren().add(loadTextArea());
+		root.getChildren().add(loadButtonBar());
 
 		Scene scene = new Scene(root);
-		stage.setTitle("Decryptor");
+		stage.setTitle("Encryptor");
 		stage.setScene(scene);
 		stage.initOwner(crptographerGUI);
 		stage.initModality(Modality.WINDOW_MODAL);
@@ -56,7 +59,7 @@ public class DecryptActionGUI {
 		stage.show();
 	}
 	
-	private void loadMenubar(Stage stage) {
+	private MenuBar loadMenubar(Stage stage) {
 		final MenuBar menuBar = new MenuBar();
 		final Menu menu1 = new Menu("File");
 		final MenuItem returnToMenu = new MenuItem("Return to Menu");
@@ -65,80 +68,90 @@ public class DecryptActionGUI {
 		// Adds the MenuItem's to all Menu's
 		menu1.getItems().addAll(returnToMenu, fileExit);
 		// Adds the menuBar to the VBox root
-		root.getChildren().addAll(menuBar);
 		returnToMenu.setOnAction(event -> stage.close());
 		fileExit.setOnAction(event -> {
 			Platform.exit();
 			System.exit(0);
 		});
+		return menuBar;
 	}
 	
-	private void loadTextArea() {
-		TextArea taPlainText = new TextArea("Enter Encrypted Text:");
+	private VBox loadTextArea() {
+		taPlainText = new TextArea("Enter Encrypted Text:");
 		taPlainText.setPrefSize(800, 300);
 		taPlainText.setFocusTraversable(false);
 		taPlainText.setWrapText(true);
 		taPlainText.setStyle("-fx-font-size: 22");
-		TextArea taEncrpytedResult = new TextArea("Result:");
-		taEncrpytedResult.setPrefSize(800, 250);
-		taEncrpytedResult.setEditable(false);
-		taEncrpytedResult.setFocusTraversable(false);
-		taEncrpytedResult.setWrapText(true);
-		taEncrpytedResult.setStyle("-fx-font-size: 22");
+		taEncryptedResult = new TextArea("Result:");
+		taEncryptedResult.setPrefSize(800, 250);
+		taEncryptedResult.setEditable(false);
+		taEncryptedResult.setFocusTraversable(false);
+		taEncryptedResult.setWrapText(true);
+		taEncryptedResult.setStyle("-fx-font-size: 22");
 		
 		VBox textContent = new VBox(10);
-		textContent.setPadding(new Insets(20));
-		textContent.getChildren().addAll(taPlainText, taEncrpytedResult, loadButtonBar(taPlainText, taEncrpytedResult));
-		root.getChildren().add(textContent);
+		textContent.setPadding(new Insets(DEFAULT_BORDER_INSET_SPACING));
+		textContent.getChildren().addAll(taPlainText, taEncryptedResult);
 	
 		taPlainText.setOnMouseClicked(event -> {
 			if(taPlainText.getText().equals("Enter Encrypted Text:")) taPlainText.setText("");
 		});
+		return textContent;
 	}
 	
-	private HBox loadButtonBar(TextArea taPlainText, TextArea taEncrpytedResult) {
-		HBox buttonBar = new HBox(10);
+	private BorderPane loadButtonBar() {
+		BorderPane buttonBar = new BorderPane();
 		buttonBar.setPrefWidth(800);
+		buttonBar.setPadding(new Insets(DEFAULT_BORDER_INSET_SPACING));
+		
 		HBox relaventButtons = new HBox(5);	
+		Button encrypt = new Button("Decrypt");
+		encrypt.setPrefSize(100, 50);
+		relaventButtons.getChildren().add(encrypt);
+		buttonBar.setRight(relaventButtons);
+		
 		HBox buttonUtils = new HBox(5);
-
-		relaventButtons.setAlignment(Pos.BASELINE_RIGHT);
-		Button decrypt = new Button("Decrypt");
-		Button reset = new Button("Reset");
-		decrypt.setPrefSize(100, 50);
-		reset.setPrefSize(100, 50);
-		
-		relaventButtons.setAlignment(Pos.BASELINE_LEFT);
 		Button copy = new Button("Copy Result To Clipboard");
-		copy.setPrefSize(200, 50);
+		Button paste = new Button("Paste From Clipboard");
+		Button reset = new Button("Reset");
+		reset.setPrefSize(100, 50);
+		copy.setPrefSize(175, 50);
+		paste.setPrefSize(175, 50);
+		buttonUtils.getChildren().addAll(copy, paste, reset);
+		buttonBar.setLeft(buttonUtils);	
 		
-		buttonUtils.getChildren().addAll(copy);
-		relaventButtons.getChildren().addAll(reset, decrypt);
-		buttonBar.getChildren().addAll(buttonUtils, relaventButtons);
-
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+	    final ClipboardContent content = new ClipboardContent();
 		copy.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				final Clipboard clipboard = Clipboard.getSystemClipboard();
-			    final ClipboardContent content = new ClipboardContent();
-			    content.putString(taEncrpytedResult.getText());
+				content.putString(taEncryptedResult.getText());
 			    clipboard.setContent(content);
 			    copy.setText("Copied!");
 			}
 		});
+		
+		paste.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+			    taPlainText.setText(clipboard.getString());
+			    paste.setText("Pasted!");
+			}
+		});
 			
 		reset.setOnAction(event -> {
-			 taPlainText.setText("Enter Text:");
-			 taEncrpytedResult.setText("Result:");
+			 taPlainText.setText("Enter Encrypted Text:");
+			 taEncryptedResult.setText("Result:");
 			 copy.setText("Copy Result To Clipboard");
+			 paste.setText("Paste From Clipboard");
 		});
 		
-		decrypt.setOnAction(new EventHandler<ActionEvent>() {
+		encrypt.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
 					String encryptedResult = encrpytable.decrypt(taPlainText.getText());
-					taEncrpytedResult.setText(encryptedResult);
+					taEncryptedResult.setText(encryptedResult);
 					copy.setText("Copy Result To Clipboard");
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -146,5 +159,9 @@ public class DecryptActionGUI {
 			}
 		});	
 		return buttonBar;
+	}
+	
+	private void alert() {
+		
 	}
 }
