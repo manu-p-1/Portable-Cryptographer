@@ -96,7 +96,6 @@ public class CryptographerGUI extends Application {
 		$fileMenu.getItems().add(fileExit);
 		$modeMenu.getItems().addAll(encrypt, decrypt);
 		$helpMenu.getItems().add(helpAbout);
-		// Adds the menuBar to the VBox root
 		fileExit.setOnAction(event -> {
 			Platform.exit();
 			System.exit(0);
@@ -123,7 +122,6 @@ public class CryptographerGUI extends Application {
 		VBox textContent = new VBox(10);
 		textContent.setPadding(new Insets(DEFAULT_BORDER_INSET_SPACING));
 		textContent.getChildren().addAll(taPlainText, taCrypticResult);
-	
 		taPlainText.setOnMouseClicked(event -> {
 			if(taPlainText.getText().equals("Enter Text:") || 
 					taPlainText.getText().equals("Enter Encrypted Text:")) {
@@ -141,8 +139,7 @@ public class CryptographerGUI extends Application {
 		cryptosystemVariable = new Button("Encrypt");
 		cryptosystemVariable.setPrefSize(100, 50);
 		relaventButtons.getChildren().add(cryptosystemVariable);
-		buttonBar.setRight(relaventButtons);
-		
+		buttonBar.setRight(relaventButtons);		
 		HBox buttonUtils = new HBox(5);
 		Button copy = new Button("Copy Result");
 		Button paste = new Button("Paste From Clipboard");
@@ -154,19 +151,15 @@ public class CryptographerGUI extends Application {
 		buttonBar.setLeft(buttonUtils);		
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 	    final ClipboardContent content = new ClipboardContent();
-		copy.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
+		copy.setOnAction(event -> {
 				content.putString(taCrypticResult.getText());
 			    clipboard.setContent(content);
-			    copy.setText("Copied!");
-			}
+			    copy.setText("Copied!");			
 		});		
 		paste.setOnAction(event -> {
 			    taPlainText.setText(clipboard.getString());
 			    paste.setText("Pasted!");
-			}
-		);		
+		});		
 		reset.setOnAction(event -> {
 			 taPlainText.setText("Enter Text:");
 			 taCrypticResult.setText("Result:");
