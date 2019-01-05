@@ -111,14 +111,15 @@ public class CryptographerGUI extends Application {
 		taPlainText.setPrefSize(800, 300);
 		taPlainText.setFocusTraversable(false);
 		taPlainText.setWrapText(true);
-		taPlainText.setStyle("-fx-font-size: 22");
+		taPlainText.setStyle("-fx-font-size: 22; "
+				+ "-fx-control-inner-background: #cccccc");
 		taCrypticResult = new TextArea("Result:");
 		taCrypticResult.setPrefSize(800, 250);
 		taCrypticResult.setEditable(false);
 		taCrypticResult.setFocusTraversable(false);
 		taCrypticResult.setWrapText(true);
-		taCrypticResult.setStyle("-fx-font-size: 22");
-		
+		taCrypticResult.setStyle("-fx-font-size: 22; "
+				+ "-fx-control-inner-background: #cccccc");
 		VBox textContent = new VBox(10);
 		textContent.setPadding(new Insets(DEFAULT_BORDER_INSET_SPACING));
 		textContent.getChildren().addAll(taPlainText, taCrypticResult);
