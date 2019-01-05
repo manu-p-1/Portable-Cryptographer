@@ -1,16 +1,10 @@
 package projects.encryptor;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-
 public interface BasicCryptosystem {
 	
-	public String encrypt(String plainTxt) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, UnsupportedEncodingException;
+	public String encrypt(String plainTxt) throws Exception;
 	
-	public String decrypt(String encrpyted) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException;
+	public String decrypt(String encrpyted) throws Exception;
 	
 	public boolean isEncrypted();
 	
