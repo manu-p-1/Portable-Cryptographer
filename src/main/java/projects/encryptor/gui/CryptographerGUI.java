@@ -3,6 +3,8 @@ package projects.encryptor.gui;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.NoSuchPaddingException;
 
+import com.sun.javafx.sg.prism.web.NGWebView;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 
@@ -24,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.ir.ThrowNode;
 import projects.encryptor.BasicCryptosystem;
 import projects.encryptor.Cryptographer;
 
@@ -41,8 +44,11 @@ public class CryptographerGUI extends Application {
 	public void start(Stage stage) {
 		try {
 			basicCryptosystem = new Cryptographer();
+			throw new NoSuchAlgorithmException();
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-			e.printStackTrace();
+			System.err.println(e + " occured.");
+			Platform.exit();
+			System.exit(1);
 		}
 		root.setPrefSize(900, 700);
 		root.getChildren().add(loadMenubar(stage));
