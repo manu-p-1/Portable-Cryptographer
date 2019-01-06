@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(#999999, #595959, #999999);;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.encryptor.gui.FXMLController">
+   <children>
+      <MenuBar id="menuBar">
+        <menus>
+          <Menu id="fileMenu" mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem id="fileClose" mnemonicParsing="false" onAction="#closeMenuItemOnAction" text="Close" />
+            </items>
+          </Menu>
+          <Menu id="modeMenu" mnemonicParsing="false" text="Mode">
+               <items>
+                  <CheckMenuItem id="modeEncrypt" fx:id="modeEncrypt" mnemonicParsing="false" onAction="#checkMenuItemEncryptOnAction" selected="true" text="Encrypt" />
+                  <CheckMenuItem id="modeDecrypt" fx:id="modeDecrypt" mnemonicParsing="false" onAction="#checkMenuItemDecryptOnAction" text="Decrypt" />
+               </items>
+          </Menu>
+          <Menu id="helpMenu" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem id="helpAbout" mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <VBox id="textContent" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
+         <opaqueInsets>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </opaqueInsets>
+         <children>
+            <TextArea id="taPlainText" fx:id="taPlainText" focusTraversable="false" prefHeight="300.0" prefWidth="800.0" promptText="Enter Text" style="-fx-font-size: 22;; -fx-control-inner-background: #cccccc;" wrapText="true" />
+            <TextArea id="taCrypticResult" fx:id="taCrypticResult" focusTraversable="false" prefHeight="250.0" prefWidth="800.0" promptText="Result" style="-fx-font-size: 22; -fx-control-inner-background: #cccccc;" wrapText="true" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <BorderPane id="buttonBar" prefWidth="800.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <left>
+            <HBox id="buttonUtils" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button id="copyBtn" fx:id="copyBtn" mnemonicParsing="false" onMouseClicked="#copyOnMouseClicked" prefHeight="50.0" prefWidth="175.0" text="Copy Result" textAlignment="CENTER" />
+                  <Button id="pasteBtn" fx:id="pasteBtn" mnemonicParsing="false" onMouseClicked="#pasteOnMouseClicked" prefHeight="50.0" prefWidth="175.0" text="Paste from Clipboard" />
+                  <Button id="resetBtn" mnemonicParsing="false" onMouseClicked="#resetOnMouseClicked" prefHeight="50.0" prefWidth="150.0" text="Reset" />
+               </children>
+            </HBox>
+         </left>
+         <right>
+            <HBox id="encryptSepHBox" BorderPane.alignment="CENTER">
+               <children>
+                  <Button id="cryptosystemVariableBtn" fx:id="cryptosystemVariableBtn" mnemonicParsing="false" onMouseClicked="#cryptosystemVariableOnMouseClicked" prefHeight="50.0" prefWidth="100.0" text="Encrypt" />
+               </children>
+            </HBox>
+         </right>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </BorderPane>
+   </children>
+</VBox>
