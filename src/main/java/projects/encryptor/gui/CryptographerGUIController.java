@@ -52,23 +52,23 @@ public class CryptographerGUIController {
 		cryptosystemVariableBtn.setText("Decrypt");
 	}
 	
-	public void copyOnMouseClicked() {
+	public void copyBtnOnMouseClicked() {
 		content.putString(taCrypticResult.getText());
 	    clipboard.setContent(content);
 		copyBtn.setText("Copied!");
 	}
 	
-	public void pasteOnMouseClicked() {
+	public void pasteBtnOnMouseClicked() {
 		taPlainText.setText(clipboard.getString());
 		pasteBtn.setText("Pasted!");
 	}
 	
-	public void resetOnMouseClicked() {
+	public void resetBtnOnMouseClicked() {
 		clearTextAreas();
-		resetCopyPasteText();
+		resetCopyPasteButtonText();
 	}
 	
-	private void resetCopyPasteText() {
+	private void resetCopyPasteButtonText() {
 		copyBtn.setText("Copy Result");
 		pasteBtn.setText("Paste from Clipboard");
 	}
@@ -78,7 +78,7 @@ public class CryptographerGUIController {
 		taCrypticResult.clear();
 	}
 	
-	public void cryptosystemVariableOnMouseClicked() {
+	public void cryptosystemVariableBtnOnMouseClicked() {
 		try {
 			if(modeEncrypt.isSelected()) {
 				String encryptedResult = cryptographer.encrypt(taPlainText.getText());
@@ -87,7 +87,7 @@ public class CryptographerGUIController {
 				String decryptedResult = cryptographer.decrypt(taPlainText.getText());
 				taCrypticResult.setText(decryptedResult);
 			}
-			resetCopyPasteText();
+			resetCopyPasteButtonText();
 		} catch (Exception e) {
 			alert(taPlainText.getText());
 		}
