@@ -64,6 +64,7 @@ public class CryptographerGUIController {
 	}
 	
 	public void resetOnMouseClicked() {
+		clearTextAreas();
 		copyBtn.setText("Copy Result");
 		pasteBtn.setText("Paste from Clipboard");
 	}
