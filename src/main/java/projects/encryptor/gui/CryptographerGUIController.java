@@ -15,7 +15,7 @@ import javafx.scene.input.ClipboardContent;
 
 import projects.encryptor.*;
 
-public class FXMLController {
+public class CryptographerGUIController {
 	
 	@FXML private CheckMenuItem modeEncrypt, modeDecrypt;
 	@FXML private TextArea taPlainText, taCrypticResult;
@@ -24,7 +24,7 @@ public class FXMLController {
 	private final Clipboard clipboard = Clipboard.getSystemClipboard();
 	private final ClipboardContent content = new ClipboardContent();
 	
-	public FXMLController() {
+	public CryptographerGUIController() {
 		try {
 			cryptographer = new Cryptographer();
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
