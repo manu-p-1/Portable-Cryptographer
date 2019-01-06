@@ -65,6 +65,10 @@ public class CryptographerGUIController {
 	
 	public void resetOnMouseClicked() {
 		clearTextAreas();
+		resetCopyPasteText();
+	}
+	
+	private void resetCopyPasteText() {
 		copyBtn.setText("Copy Result");
 		pasteBtn.setText("Paste from Clipboard");
 	}
@@ -83,7 +87,7 @@ public class CryptographerGUIController {
 				String decryptedResult = cryptographer.decrypt(taPlainText.getText());
 				taCrypticResult.setText(decryptedResult);
 			}
-			resetOnMouseClicked();
+			resetCopyPasteText();
 		} catch (Exception e) {
 			alert(taPlainText.getText());
 		}
