@@ -3,4 +3,11 @@
   <groupId>projects.converter</groupId>
   <artifactId>BitConverter</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+    		<groupId>com.jfoenix</groupId>
+    		<artifactId>jfoenix</artifactId>
+    		<version>8.0.8</version>
+		</dependency>
+	</dependencies>
 </project>
