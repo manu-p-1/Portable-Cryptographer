@@ -48,16 +48,17 @@
          <left>
             <HBox id="buttonUtils" spacing="5.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button id="copyBtn" fx:id="copyBtn" mnemonicParsing="false" onMouseClicked="#copyBtnOnMouseClicked" prefHeight="50.0" prefWidth="175.0" text="Copy Result" textAlignment="CENTER" />
-                  <Button id="pasteBtn" fx:id="pasteBtn" mnemonicParsing="false" onMouseClicked="#pasteBtnOnMouseClicked" prefHeight="50.0" prefWidth="175.0" text="Paste from Clipboard" />
-                  <Button id="resetBtn" mnemonicParsing="false" onMouseClicked="#resetBtnOnMouseClicked" prefHeight="50.0" prefWidth="150.0" text="Reset" />
+                  <Button id="copyBtn" fx:id="copyBtn" mnemonicParsing="false" onMouseClicked="#copyBtnOnMouseClicked" prefHeight="40.0" prefWidth="150.0" text="Copy Result" textAlignment="CENTER" />
+                  <Button id="pasteBtn" fx:id="pasteBtn" mnemonicParsing="false" onMouseClicked="#pasteBtnOnMouseClicked" prefHeight="40.0" prefWidth="150.0" text="Paste from Clipboard" />
+                  <Button fx:id="showHideTextBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Hide Text" />       
+                  <Button id="resetBtn" mnemonicParsing="false" onMouseClicked="#resetBtnOnMouseClicked" prefHeight="40.0" prefWidth="150.0" text="Reset" />
                </children>
             </HBox>
          </left>
          <right>
             <HBox id="encryptSepHBox" BorderPane.alignment="CENTER">
                <children>
-                  <Button id="cryptosystemVariableBtn" fx:id="cryptosystemVariableBtn" mnemonicParsing="false" onMouseClicked="#cryptosystemVariableBtnOnMouseClicked" prefHeight="50.0" prefWidth="100.0" text="Encrypt" />
+                  <Button id="cryptosystemVariableBtn" fx:id="cryptosystemVariableBtn" mnemonicParsing="false" onMouseClicked="#cryptosystemVariableBtnOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Encrypt" />
                </children>
             </HBox>
          </right>

@@ -2,7 +2,6 @@ package projects.encryptor.gui;
 
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.NoSuchPaddingException;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,17 +11,17 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-
 import projects.encryptor.*;
 
 public class CryptographerGUIController {
 	
 	@FXML private CheckMenuItem modeEncrypt, modeDecrypt;
 	@FXML private TextArea taPlainText, taCrypticResult;
-	@FXML private Button copyBtn, pasteBtn, resetBtn, cryptosystemVariableBtn;
+	@FXML private Button copyBtn, pasteBtn, showHideTextBtn, resetBtn, cryptosystemVariableBtn;
 	private Cryptographer cryptographer;
 	private final Clipboard clipboard = Clipboard.getSystemClipboard();
 	private final ClipboardContent content = new ClipboardContent();
+
 	
 	public CryptographerGUIController() {
 		try {
@@ -40,15 +39,17 @@ public class CryptographerGUIController {
 	
 	public void checkMenuItemEncryptOnAction() {
 		modeDecrypt.setSelected(false);
-		clearTextAreas();
-		taPlainText.setPromptText("Enter Text");
+		taPlainText.setEditable(true);
+		resetBtnOnMouseClicked();
+		taPlainText.setPromptText("Enter Text:");
 		cryptosystemVariableBtn.setText("Encrypt");
 	}
 	
 	public void checkMenuItemDecryptOnAction() {
 		modeEncrypt.setSelected(false);
-		clearTextAreas();
-		taPlainText.setPromptText("Enter Encrypted Text");
+		taPlainText.setEditable(false);
+		resetBtnOnMouseClicked();
+		taPlainText.setPromptText("Enter Encrypted Text:");
 		cryptosystemVariableBtn.setText("Decrypt");
 	}
 	
@@ -65,10 +66,10 @@ public class CryptographerGUIController {
 	
 	public void resetBtnOnMouseClicked() {
 		clearTextAreas();
-		resetCopyPasteButtonText();
+		resetCopyPasteBtnText();
 	}
 	
-	private void resetCopyPasteButtonText() {
+	private void resetCopyPasteBtnText() {
 		copyBtn.setText("Copy Result");
 		pasteBtn.setText("Paste from Clipboard");
 	}
@@ -76,7 +77,7 @@ public class CryptographerGUIController {
 	private void clearTextAreas() {
 		taPlainText.clear();
 		taCrypticResult.clear();
-	}
+	}	
 	
 	public void cryptosystemVariableBtnOnMouseClicked() {
 		try {
@@ -87,7 +88,7 @@ public class CryptographerGUIController {
 				String decryptedResult = cryptographer.decrypt(taPlainText.getText());
 				taCrypticResult.setText(decryptedResult);
 			}
-			resetCopyPasteButtonText();
+			resetCopyPasteBtnText();
 		} catch (Exception e) {
 			alert(taPlainText.getText());
 		}

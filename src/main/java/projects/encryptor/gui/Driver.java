@@ -16,6 +16,7 @@ public class Driver extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Portable Cryptographer");
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
