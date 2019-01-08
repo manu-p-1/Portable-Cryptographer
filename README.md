@@ -1,3 +1,3 @@
-# Portable-Cryptographer
+# Portable Cryptographer
 
-A tool to encrypt text using AES. Documentation and more info coming soon
+A simple application to securely encrypt text using the Advanced Encryption Standard, or AES for short.
