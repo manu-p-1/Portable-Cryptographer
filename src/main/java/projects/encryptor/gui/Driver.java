@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 public class Driver extends Application {
 	
@@ -20,6 +21,8 @@ public class Driver extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Portable Cryptographer");
 		primaryStage.setResizable(false);
+		primaryStage.getIcons().add(new Image(
+				"/PortableCryptographer/src/main/java/projects/encryptor/gui/Application_Icons/key.png"));
 		primaryStage.show();
 	}
 	
