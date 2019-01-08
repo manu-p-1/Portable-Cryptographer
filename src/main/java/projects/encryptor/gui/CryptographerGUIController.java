@@ -29,19 +29,18 @@ import javax.crypto.NoSuchPaddingException;
 import projects.encryptor.Cryptographer;
 
 public class CryptographerGUIController {
-	
+
 	@FXML private StackPane wrapStackPane;
 	@FXML private CheckMenuItem modeEncrypt, modeDecrypt;
 	@FXML private JFXTextArea taPlainText, taCrypticResult;
 	@FXML private JFXButton copyBtn, pasteBtn, showHideTextBtn, resetBtn, cryptosystemVariableBtn;
-    @FXML private Text charCounter;
+	@FXML private Text charCounter;
 	private Cryptographer cryptographer;
 	private Stage stage;
 	private final Clipboard clipboard = Clipboard.getSystemClipboard();
 	private final ClipboardContent content = new ClipboardContent();
 	private static final int MAXIMUM_ALLOWED_CHARACTERS = 1000;
 
-	
 	public CryptographerGUIController() {
 		try {
 			cryptographer = new Cryptographer();
@@ -50,71 +49,71 @@ public class CryptographerGUIController {
 			System.exit(1);
 		}
 	}
-	
+
 	public void setStageAndSetupListeners(Stage stage) {
 		this.stage = stage;
 	}
-	
+
 	public void closeMenuItemOnAction() {
 		Platform.exit();
 		System.exit(0);
 	}
-	
+
 	public void checkMenuItemEncryptOnAction() {
 		modeDecrypt.setSelected(false);
 		resetBtnOnMouseClicked();
 		taPlainText.setPromptText("Enter Text:");
 		cryptosystemVariableBtn.setText("Encrypt");
 	}
-	
+
 	public void checkMenuItemDecryptOnAction() {
 		modeEncrypt.setSelected(false);
 		resetBtnOnMouseClicked();
 		taPlainText.setPromptText("Enter Encrypted Text:");
 		cryptosystemVariableBtn.setText("Decrypt");
 	}
-	
+
 	public void copyBtnOnMouseClicked() {
 		content.putString(taCrypticResult.getText());
 	    clipboard.setContent(content);
 		copyBtn.setText("Copied!");
 	}
-	
+
 	public void pasteBtnOnMouseClicked() {
 		taPlainText.setText(clipboard.getString());
 		Platform.runLater(() -> charCounter.setText("Character Count:  " + taPlainText.getText().length() + "/1000"));
 		pasteBtn.setText("Pasted!");
 	}
-	
+
 	public void resetBtnOnMouseClicked() {
 		clearTextAreas();
 		resetCopyPasteBtnText();
 		Platform.runLater(() -> charCounter.setText("Character Count:  "));
 	}
-	
+
 	private void resetCopyPasteBtnText() {
 		copyBtn.setText("Copy Result");
 		pasteBtn.setText("Paste to Field");
 	}
-	
+
 	private void clearTextAreas() {
 		taPlainText.clear();
 		taCrypticResult.clear();
-	}	
-	
+	}
+
 	public void charCountInspector() {
 		Platform.runLater(() -> charCounter.setText("Character Count:  " + taPlainText.getText().length() + "/1000"));
 		taPlainText.textProperty().addListener(new ChangeListener<String>() {
 	        @Override
 	        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
 	            if (taPlainText.getText().length() >= MAXIMUM_ALLOWED_CHARACTERS) {
-	            	taPlainText.setText(taPlainText.getText().substring(0, MAXIMUM_ALLOWED_CHARACTERS));  
+	            	taPlainText.setText(taPlainText.getText().substring(0, MAXIMUM_ALLOWED_CHARACTERS));
 	            }
 	        }
 	    });
 	}
-	
-	public void showHideTextBtnOnMouseClicked() {	
+
+	public void showHideTextBtnOnMouseClicked() {
 		if(showHideTextBtn.getText().equals("Hide Text")) { //To hide text
 			showHideTextBtn.setText("Show Text");
 			taPlainText.setStyle("-fx-background-color: #78909C; -fx-text-fill: #78909C;");
@@ -124,7 +123,7 @@ public class CryptographerGUIController {
 			taPlainText.setStyle("-fx-background-color: #78909C; -fx-text-fill: #424242");
 		}
 	}
-	
+
 	public void showAboutMenuOnMouseClicked() {
 		JFXDialogLayout content = new JFXDialogLayout();
 		content.setHeading(new Text("About"));
@@ -140,29 +139,29 @@ public class CryptographerGUIController {
 		button.setButtonType(ButtonType.RAISED);
 		button.setOnAction(e -> dialog.close());
 		content.setActions(button);
-		dialog.show();	
+		dialog.show();
 	}
-	
+
 	public void saveResultThroughSystem() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save Result to File");    
+		fileChooser.setTitle("Save Result to File");
         fileChooser.getExtensionFilters().addAll(
         		new ExtensionFilter("Text Files", "*.txt"),
         		new ExtensionFilter("Microsoft Word Document", "*.docx"));
         File file = fileChooser.showSaveDialog(stage);
         if (file != null) {saveTextToFile(taCrypticResult.getText(), file);}
 	}
-	
+
 	private void saveTextToFile(String content, File file) {
-        try {
-            PrintWriter writer = new PrintWriter(file);
-            writer.println(content);
-            writer.close();
-        } catch (IOException IOe) {
-            System.err.println(IOe);
-        }
+      try {
+          PrintWriter writer = new PrintWriter(file);
+          writer.println(content);
+          writer.close();
+      } catch (IOException IOe) {
+          System.err.println(IOe);
+      }
     }
-	
+
 	public void cryptosystemVariableBtnOnMouseClicked() {
 		try {
 			if(modeEncrypt.isSelected()) {
@@ -187,6 +186,6 @@ public class CryptographerGUIController {
 		button.setButtonType(ButtonType.RAISED);
 		button.setOnAction(e -> dialog.close());
 		content.setActions(button);
-		dialog.show();	
+		dialog.show();
 	}
 }
