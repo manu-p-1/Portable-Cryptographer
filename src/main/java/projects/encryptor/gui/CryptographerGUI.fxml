@@ -22,8 +22,8 @@
               <menus>
                 <Menu id="fileMenu" mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem id="fileClose" mnemonicParsing="false" onAction="#closeMenuItemOnAction" text="Close" />
                         <MenuItem mnemonicParsing="false" onAction="#saveResultThroughSystem" text="Save Result" />
+                    <MenuItem id="fileClose" mnemonicParsing="false" onAction="#closeMenuItemOnAction" text="Close" />
                   </items>
                 </Menu>
                 <Menu id="modeMenu" mnemonicParsing="false" text="Mode">
