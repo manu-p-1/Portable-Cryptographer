@@ -22,7 +22,7 @@ public class Driver extends Application {
 		primaryStage.setTitle("Portable Cryptographer");
 		primaryStage.setResizable(false);
 		primaryStage.getIcons().add(new Image(
-				"/PortableCryptographer/src/main/java/projects/encryptor/gui/Application_Icons/key.png"));
+				"/projects/encryptor/gui/Application_Icons/mainApplicationIcon.png"));
 		primaryStage.show();
 	}
 	
