@@ -1,8 +1,5 @@
 package projects.encryptor.gui;
 
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.NoSuchPaddingException;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -13,14 +10,23 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import projects.encryptor.*;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.NoSuchPaddingException;
+
+import projects.encryptor.Cryptographer;
 
 public class CryptographerGUIController {
 	
@@ -30,6 +36,7 @@ public class CryptographerGUIController {
 	@FXML private JFXButton copyBtn, pasteBtn, showHideTextBtn, resetBtn, cryptosystemVariableBtn;
     @FXML private Text charCounter;
 	private Cryptographer cryptographer;
+	private Stage stage;
 	private final Clipboard clipboard = Clipboard.getSystemClipboard();
 	private final ClipboardContent content = new ClipboardContent();
 	private static final int MAXIMUM_ALLOWED_CHARACTERS = 1000;
@@ -42,6 +49,10 @@ public class CryptographerGUIController {
 			System.err.println(e + " occured.");
 			System.exit(1);
 		}
+	}
+	
+	public void setStageAndSetupListeners(Stage stage) {
+		this.stage = stage;
 	}
 	
 	public void closeMenuItemOnAction() {
@@ -114,13 +125,15 @@ public class CryptographerGUIController {
 		}
 	}
 	
-	public void showAboutMenuOnClicked() {
+	public void showAboutMenuOnMouseClicked() {
 		JFXDialogLayout content = new JFXDialogLayout();
 		content.setHeading(new Text("About"));
 		content.setBody(new Text("A simple utility to encrypt any text using AES (Advanced Encryption Standard).\n"
-				+ "Use the Mode menu to swap between encryption and decryption."
+				+ "Use the Mode menu to swap between encryption and decryption.\n"
 				+ "Decrypted text needs to be properly formatted in order to decrypt properly.\n"
 				+ "Use the File menu to exit the application or save the encrypted or decrypted result as a text file.\n"
+				+ "Copy Result copies the encrypted or decrypted result to the systems clipboard.\n"
+				+ "Paste to Field pastes any text on the systems clipboard to the text box"
 				+ "\n\n Manu Puduvalli V2.6"));
 		JFXDialog dialog = new JFXDialog(wrapStackPane, content, JFXDialog.DialogTransition.CENTER);
 		JFXButton button = new JFXButton("Close");
@@ -129,6 +142,26 @@ public class CryptographerGUIController {
 		content.setActions(button);
 		dialog.show();	
 	}
+	
+	public void saveResultThroughSystem() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save Result to File");    
+        fileChooser.getExtensionFilters().addAll(
+        		new ExtensionFilter("Text Files", "*.txt"),
+        		new ExtensionFilter("Microsoft Word Document", "*.docx"));
+        File file = fileChooser.showSaveDialog(stage);
+        if (file != null) {saveTextToFile(taCrypticResult.getText(), file);}
+	}
+	
+	private void saveTextToFile(String content, File file) {
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            writer.println(content);
+            writer.close();
+        } catch (IOException IOe) {
+            System.err.println(IOe);
+        }
+    }
 	
 	public void cryptosystemVariableBtnOnMouseClicked() {
 		try {
@@ -146,11 +179,14 @@ public class CryptographerGUIController {
 	}
 
 	private void alert(String expression) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error");
-		alert.setHeaderText("Invalid Entry");
-		alert.setContentText("\"" + expression + "\""
-				+ " is not a valid entry.");
-		alert.showAndWait();
+		JFXDialogLayout content = new JFXDialogLayout();
+		content.setHeading(new Text("Error!"));
+		content.setBody(new Text(expression + " is not a valid decrypted text."));
+		JFXDialog dialog = new JFXDialog(wrapStackPane, content, JFXDialog.DialogTransition.CENTER);
+		JFXButton button = new JFXButton("Close");
+		button.setButtonType(ButtonType.RAISED);
+		button.setOnAction(e -> dialog.close());
+		content.setActions(button);
+		dialog.show();	
 	}
 }

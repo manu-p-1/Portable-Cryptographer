@@ -20,20 +20,21 @@
          <children>
             <MenuBar id="menuBar" style="-fx-background-color: #515C6B; -fx-base: #515C6B;">
               <menus>
-                <Menu id="fileMenu" fx:id="fileMenu" mnemonicParsing="false" text="File">
+                <Menu id="fileMenu" mnemonicParsing="false" text="File">
                   <items>
                     <MenuItem id="fileClose" mnemonicParsing="false" onAction="#closeMenuItemOnAction" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#saveResultThroughSystem" text="Save Result" />
                   </items>
                 </Menu>
-                <Menu id="modeMenu" fx:id="modeMenu" mnemonicParsing="false" text="Mode">
+                <Menu id="modeMenu" mnemonicParsing="false" text="Mode">
                      <items>
                         <CheckMenuItem id="modeEncrypt" fx:id="modeEncrypt" mnemonicParsing="false" onAction="#checkMenuItemEncryptOnAction" selected="true" text="Encrypt" />
                         <CheckMenuItem id="modeDecrypt" fx:id="modeDecrypt" mnemonicParsing="false" onAction="#checkMenuItemDecryptOnAction" text="Decrypt" />
                      </items>
                 </Menu>
-                <Menu id="helpMenu" fx:id="helpMenu" mnemonicParsing="false" text="Help">
+                <Menu id="helpMenu" mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem id="helpAbout" fx:id="helpAbout" mnemonicParsing="false" onAction="#showAboutMenuOnClicked" text="About" />
+                    <MenuItem id="helpAbout" mnemonicParsing="false" onAction="#showAboutMenuOnMouseClicked" text="About" />
                   </items>
                 </Menu>
               </menus>
@@ -41,7 +42,7 @@
                   <Insets bottom="3.0" left="15.0" top="3.0" />
                </padding>
             </MenuBar>
-            <VBox id="textContent" fx:id="textContent" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <VBox id="textContent" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
