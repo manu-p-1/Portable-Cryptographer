@@ -180,7 +180,7 @@ public class CryptographerGUIController {
 				+ "WARNING! This application is not meant to be used in any serious programs as the key used for encryption\n"
 				+ "is public. This tool is meant for personal and insignificant purposes.\n"
 				+ "Please take the aforementioned message into account when utilizing this tool."
-				+ "\n\n Manu Puduvalli V1.0 Alpha";
+				+ "\n\n Manu Puduvalli v1.0-Alpha";
 		
 		static final String ERROR = " is not a valid decrypted text.";
 		
