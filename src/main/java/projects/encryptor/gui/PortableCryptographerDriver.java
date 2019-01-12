@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
-public class Driver extends Application {
+public class PortableCryptographerDriver extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {
