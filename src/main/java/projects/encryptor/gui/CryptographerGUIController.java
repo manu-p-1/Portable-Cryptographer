@@ -125,21 +125,8 @@ public class CryptographerGUIController {
 	}
 
 	public void showAboutMenuOnMouseClicked() {
-		JFXDialogLayout content = new JFXDialogLayout();
-		content.setHeading(new Text("About"));
-		content.setBody(new Text("A simple utility to encrypt any text using AES (Advanced Encryption Standard).\n"
-				+ "Use the Mode menu to swap between encryption and decryption.\n"
-				+ "Decrypted text needs to be properly formatted in order to decrypt properly.\n"
-				+ "Use the File menu to exit the application or save the encrypted or decrypted result as a text file.\n"
-				+ "Copy Result copies the encrypted or decrypted result to the systems clipboard.\n"
-				+ "Paste to Field pastes any text on the systems clipboard to the text box"
-				+ "\n\n Manu Puduvalli V2.6"));
-		JFXDialog dialog = new JFXDialog(wrapStackPane, content, JFXDialog.DialogTransition.CENTER);
-		JFXButton button = new JFXButton("Close");
-		button.setButtonType(ButtonType.RAISED);
-		button.setOnAction(e -> dialog.close());
-		content.setActions(button);
-		dialog.show();
+		JFXDialog jfxd = DialogInformationContext.generateDialog(wrapStackPane, "About", DialogInformationContext.ABOUT,"");
+		jfxd.show();
 	}
 
 	public void saveResultThroughSystem() {
@@ -178,14 +165,40 @@ public class CryptographerGUIController {
 	}
 
 	private void alert(String expression) {
-		JFXDialogLayout content = new JFXDialogLayout();
-		content.setHeading(new Text("Error!"));
-		content.setBody(new Text(expression + " is not a valid decrypted text."));
-		JFXDialog dialog = new JFXDialog(wrapStackPane, content, JFXDialog.DialogTransition.CENTER);
-		JFXButton button = new JFXButton("Close");
-		button.setButtonType(ButtonType.RAISED);
-		button.setOnAction(e -> dialog.close());
-		content.setActions(button);
-		dialog.show();
+		JFXDialog jfxd = DialogInformationContext.generateDialog(wrapStackPane, "Error", DialogInformationContext.ERROR, expression);
+		jfxd.show();
+	}
+	
+	private static class DialogInformationContext{
+		
+		static final String ABOUT = "A simple utility to encrypt any text using AES (Advanced Encryption Standard).\n"
+				+ "Use the Mode menu to swap between encryption and decryption.\n"
+				+ "Decrypted text needs to be properly formatted in order to decrypt properly.\n"
+				+ "Use the File menu to exit the application or save the encrypted or decrypted result as a text file.\n"
+				+ "Copy Result copies the encrypted or decrypted result to the systems clipboard.\n"
+				+ "Paste to Field pastes any text on the systems clipboard to the text box.\n\n"
+				+ "WARNING! This application is not meant to be used in any serious programs as the key used for encryption\n"
+				+ "is public. This tool is meant for personal and insignificant purposes.\n"
+				+ "Please take the aforementioned message into account when utilizing this tool."
+				+ "\n\n Manu Puduvalli V1.0 Alpha";
+		
+		static final String ERROR = " is not a valid decrypted text.";
+		
+		static JFXDialog generateDialog(StackPane root, String heading, String staticContent, String optionalAlertExpression) {
+			JFXDialogLayout content = new JFXDialogLayout();
+			content.setHeading(new Text(heading));		
+			if(staticContent == DialogInformationContext.ERROR) {
+				content.setBody(new Text(optionalAlertExpression + staticContent));
+			} else {
+				content.setBody(new Text(staticContent));
+			}	
+			JFXDialog dialog = new JFXDialog(root, content, JFXDialog.DialogTransition.CENTER);
+			JFXButton button = new JFXButton("Close");
+			button.setButtonType(ButtonType.RAISED);
+			button.setOnAction(e -> dialog.close());
+			content.setActions(button);
+			
+			return dialog;
+		}	
 	}
 }
