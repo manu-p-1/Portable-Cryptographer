@@ -6,7 +6,7 @@
 A simple application to securely encrypt text using the Advanced Encryption Standard, or AES for short.
 
 ### Updates:
-- **Portable Cryptographer v1.0-Alpha is out for release!**
+- **Portable Cryptographer v1.0.0-alpha.1 is out for release!**
 - Documentation coming soon!
 
 ### Application Images:
