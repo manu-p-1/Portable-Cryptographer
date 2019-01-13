@@ -15,6 +15,7 @@
 ![alt text](https://github.com/manu-p-1/Portable-Cryptographer/blob/master/src/main/java/projects/encryptor/gui/GUI_Images/Image4.png)
 
 ### Updates:
-Standalone executable and Documentation coming soon!
+- **Portable Cryptographer v1.0-Alpha is out for release!**
+- Documentation coming soon!
 
 
