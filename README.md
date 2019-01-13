@@ -27,6 +27,11 @@ A simple application to securely encrypt text using the Advanced Encryption Stan
 - **Portable Cryptographer v1.0.0-alpha.1 is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
 - Documentation coming soon!
 
+## Disclaimer:
+WARNING! This application is not meant to be used in any serious programs as the key used for encryption
+is public. This tool is meant for personal and insignificant purposes.
+Please take the aforementioned message into account when utilizing this tool.
+
 ### Media:
 
 ![alt_text](https://github.com/manu-p-1/Portable-Cryptographer/blob/master/src/main/java/projects/encryptor/gui/GUI_Images/Application_Recording.gif)
