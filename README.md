@@ -1,4 +1,7 @@
-# Portable Cryptographer
+<p align="center">
+  <img src="https://github.com/manu-p-1/Portable-Cryptographer/blob/master/src/main/java/projects/encryptor/gui/Application_Icons/PortableCryptographerLogo.png">
+</p>
+
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://oracle.com/java)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)]()  
 [![](https://img.shields.io/badge/Java%20Version-%3E%3D%201.8.0%20%7C%20%3C%3D%2010.0.2-orange.svg?style=for-the-badge)]()
