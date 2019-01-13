@@ -5,7 +5,7 @@
   <br/>
   <br/>
 
-  <a href="https://www.oracle.com/java/">
+  <a href="https://cnet1.cbsistatic.com/img/MJCJHAYMBHP76YIGb9eQu0i1yUM=/570x0/2010/04/10/5abeb7d8-f0fc-11e2-8c7c-d4ae52e62bcc/goslingkeynote.jpg">
     <img src="https://forthebadge.com/images/badges/made-with-java.svg">
   </a>
   <a href="https://gph.is/1UFc4RM">
