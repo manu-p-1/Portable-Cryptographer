@@ -11,8 +11,7 @@ import javafx.scene.image.Image;
 public class PortableCryptographerDriver extends Application {
 	
 	@Override
-	public void start(Stage primaryStage) throws IOException {
-	
+	public void start(Stage primaryStage) throws IOException {	
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CryptographerGUI.fxml"));
 		Parent root = (Parent)loader.load();
 		CryptographerGUIController cgc = (CryptographerGUIController)loader.getController();

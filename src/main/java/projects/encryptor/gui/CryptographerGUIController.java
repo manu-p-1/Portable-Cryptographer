@@ -165,7 +165,7 @@ public class CryptographerGUIController {
 	}
 
 	private void alert(String expression) {
-		JFXDialog jfxd = DialogInformationContext.generateDialog(wrapStackPane, "Error", DialogInformationContext.ERROR, expression);
+		JFXDialog jfxd = DialogInformationContext.generateDialog(wrapStackPane, "Error!", DialogInformationContext.ERROR, expression);
 		jfxd.show();
 	}
 	
@@ -189,6 +189,7 @@ public class CryptographerGUIController {
 			content.setHeading(new Text(heading));		
 			if(staticContent == DialogInformationContext.ERROR) {
 				content.setBody(new Text(optionalAlertExpression + staticContent));
+				content.setStyle("-fx-background-color: #ef5350");
 			} else {
 				content.setBody(new Text(staticContent));
 			}	
