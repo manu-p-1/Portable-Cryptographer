@@ -18,6 +18,9 @@
   <img src="https://img.shields.io/github/commits-since/manu-p-1/Portable-Cryptographer/v1.0.0-alpha.svg?style=for-the-badge">
 </p>
 
+<br/>
+<br/>
+
 A simple application to securely encrypt text using the Advanced Encryption Standard, or AES for short. :computer: :lock: :key:
 
 ## Updates:
