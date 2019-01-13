@@ -32,7 +32,7 @@ WARNING! This application is not meant to be used in any serious programs as the
 is public. This tool is meant for personal and insignificant purposes.
 Please take the aforementioned message into account when utilizing this tool.
 
-### Media:
+## Media:
 
 ![alt_text](https://github.com/manu-p-1/Portable-Cryptographer/blob/master/src/main/java/projects/encryptor/gui/GUI_Images/Application_Recording.gif)
 
