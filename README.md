@@ -7,7 +7,8 @@
 <br/>
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://oracle.com/java)
-[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)]()  
+[![forthebadge](https://forthebadge.com/images/badges/built-with-swag.svg)]()
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)]()  
 [![](https://img.shields.io/badge/Java%20Version-%3E%3D%201.8.0%20%7C%20%3C%3D%2010.0.2-orange.svg?style=for-the-badge)]()
 [![](https://img.shields.io/github/commits-since/manu-p-1/Portable-Cryptographer/v1.0.0-alpha.svg?style=for-the-badge)]()
 
