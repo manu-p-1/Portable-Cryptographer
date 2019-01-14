@@ -47,16 +47,21 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <HBox prefHeight="35.0" prefWidth="200.0">
+                  <HBox prefHeight="35.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Text fx:id="charCounter" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Character Count:  0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Text>
+                        <Text fx:id="wordCounter" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Word Count:  0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Text>
                      </children>
                   </HBox>
-                  <JFXTextArea fx:id="taPlainText" focusColor="WHITE" focusTraversable="false" onKeyPressed="#charCountInspector" pickOnBounds="false" prefHeight="300.0" prefWidth="800.0" promptText="Enter Text:" style="-fx-background-color: #78909C; -fx-text-inner-color: #424242;" unFocusColor="#424242" wrapText="true">
+                  <JFXTextArea fx:id="taPlainText" focusColor="WHITE" focusTraversable="false" onKeyPressed="#counterUpdateInspector" onMouseClicked="#taPlainTextEventFilterContextMenuBlocker" pickOnBounds="false" prefHeight="300.0" prefWidth="800.0" promptText="Enter Text:" style="-fx-background-color: #78909C; -fx-text-inner-color: #424242;" unFocusColor="#424242" wrapText="true">
                      <font>
                         <Font name="Calibri Bold" size="22.0" />
                      </font>

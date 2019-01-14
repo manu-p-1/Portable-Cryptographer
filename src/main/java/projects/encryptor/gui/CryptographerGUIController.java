@@ -9,10 +9,12 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXButton.ButtonType;
 
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -34,7 +36,7 @@ public class CryptographerGUIController {
 	@FXML private CheckMenuItem modeEncrypt, modeDecrypt;
 	@FXML private JFXTextArea taPlainText, taCrypticResult;
 	@FXML private JFXButton copyBtn, pasteBtn, showHideTextBtn, resetBtn, cryptosystemVariableBtn;
-	@FXML private Text charCounter;
+	@FXML private Text charCounter, wordCounter;
 	private Cryptographer cryptographer;
 	private Stage stage;
 	private final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -80,14 +82,14 @@ public class CryptographerGUIController {
 
 	public void pasteBtnOnMouseClicked() {
 		taPlainText.setText(clipboard.getString());
-		Platform.runLater(() -> charCounter.setText("Character Count:  0"));
+		counterUpdateInspector();
 		pasteBtn.setText("Pasted!");
 	}
 
 	public void resetBtnOnMouseClicked() {
 		clearTextAreas();
 		resetCopyPasteBtnText();
-		Platform.runLater(() -> charCounter.setText("Character Count:  0"));
+		clearCounters();
 	}
 
 	private void resetCopyPasteBtnText() {
@@ -100,9 +102,32 @@ public class CryptographerGUIController {
 		taCrypticResult.clear();
 	}
 	
-
-	public void charCountInspector() {
+	private void clearCounters() {
+		clearCharacterCount();
+		clearWordCount();
+	}
+	
+	private void clearCharacterCount() {
+		Platform.runLater(() -> charCounter.setText("Character Count:  0"));
+	}
+	
+	private void clearWordCount() {
+		Platform.runLater(() -> wordCounter.setText("Word Count:  0"));
+	}
+	
+	public void counterUpdateInspector() {
 		Platform.runLater(() -> charCounter.setText("Character Count:  " + taPlainText.getText().length()));
+		Platform.runLater(() -> {
+			if(taPlainText.getText().isEmpty()) {
+				clearWordCount();
+			} else {
+				wordCounter.setText("Word Count:  " + taPlainText.getText().trim().split("\\s+").length);
+			}
+		});
+	}
+	
+	public void taPlainTextEventFilterContextMenuBlocker() {
+		taPlainText.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);	
 	}
 
 	public void showHideTextBtnOnMouseClicked() {
@@ -132,13 +157,13 @@ public class CryptographerGUIController {
 	}
 
 	private void saveTextToFile(String content, File file) {
-      try {
-          PrintWriter writer = new PrintWriter(file);
-          writer.println(content);
-          writer.close();
-      } catch (IOException IOe) {
-          System.err.println(IOe);
-      }
+	    try {
+		    PrintWriter writer = new PrintWriter(file);
+		    writer.println(content);
+		    writer.close();
+	    } catch (IOException IOe) {
+	    	System.err.println(IOe);
+	    }
     }
 
 	public void cryptosystemVariableBtnOnMouseClicked() {
