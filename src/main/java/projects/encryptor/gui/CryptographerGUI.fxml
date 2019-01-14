@@ -49,7 +49,7 @@
                <children>
                   <HBox prefHeight="35.0" prefWidth="200.0">
                      <children>
-                        <Text fx:id="charCounter" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Character Count: ">
+                        <Text fx:id="charCounter" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Character Count:  0">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
