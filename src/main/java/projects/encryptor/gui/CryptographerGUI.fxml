@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -16,9 +17,9 @@
 
 <StackPane fx:id="wrapStackPane" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #515C6B;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.encryptor.gui.CryptographerGUIController">
    <children>
-      <VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #515C6B;">
+      <VBox id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #4d5766;">
          <children>
-            <MenuBar id="menuBar" style="-fx-background-color: #515C6B; -fx-base: #515C6B;">
+            <MenuBar id="menuBar" style="-fx-background-color: #4d5766; -fx-base: #515C6B;">
               <menus>
                 <Menu id="fileMenu" mnemonicParsing="false" text="File">
                   <items>
@@ -41,6 +42,9 @@
                <padding>
                   <Insets bottom="3.0" left="15.0" top="3.0" />
                </padding>
+               <effect>
+                  <Blend />
+               </effect>
             </MenuBar>
             <VBox id="textContent" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <opaqueInsets>
@@ -61,7 +65,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <JFXTextArea fx:id="taPlainText" focusColor="WHITE" focusTraversable="false" onKeyPressed="#counterUpdateInspector" onMouseClicked="#taPlainTextEventFilterContextMenuBlocker" pickOnBounds="false" prefHeight="300.0" prefWidth="800.0" promptText="Enter Text:" style="-fx-background-color: #78909C; -fx-text-inner-color: #424242;" unFocusColor="#424242" wrapText="true">
+                  <JFXTextArea fx:id="taPlainText" focusColor="WHITE" focusTraversable="false" onKeyPressed="#counterUpdateInspector" onMouseClicked="#taPlainTextEventFilterContextMenuBlocker" pickOnBounds="false" prefHeight="300.0" prefWidth="800.0" promptText="Enter Text:" style="-fx-background-color: #7c899c; -fx-text-inner-color: #424242;" unFocusColor="#424242" wrapText="true">
                      <font>
                         <Font name="Calibri Bold" size="22.0" />
                      </font>
@@ -72,7 +76,7 @@
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </padding>
                   </JFXTextArea>
-                  <JFXTextArea fx:id="taCrypticResult" editable="false" focusColor="WHITE" prefHeight="250.0" prefWidth="800.0" promptText="Result:" style="-fx-background-color: #78909C; -fx-text-inner-color: #424242;" unFocusColor="#424242" wrapText="true">
+                  <JFXTextArea fx:id="taCrypticResult" editable="false" focusColor="WHITE" prefHeight="250.0" prefWidth="800.0" promptText="Result:" style="-fx-background-color: #7c899c; -fx-text-inner-color: #424242;" unFocusColor="#424242" wrapText="true">
                      <font>
                         <Font name="Calibri Bold" size="22.0" />
                      </font>
