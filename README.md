@@ -43,7 +43,7 @@ Please take the aforementioned message into account when utilizing this tool.
 
 ## Media:
 <p align="center">
-    <img src="https://github.com/manu-p-1/Portable-Cryptographer/blob/master/src/main/java/projects/encryptor/gui/GUI_Images/Application_Recording.gif">   
+    <img src="https://github.com/manu-p-1/Portable-Cryptographer/blob/master/Application_Media/Application_Recording.gif">   
 </p>
 
 
