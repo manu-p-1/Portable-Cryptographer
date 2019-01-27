@@ -51,42 +51,42 @@ public class CryptographerGUIController {
 		}
 	}
 
-	public void setStageAndSetupListeners(Stage stage) {
+	protected void setStageAndSetupListeners(Stage stage) {
 		this.stage = stage;
 	}
 
-	@FXML public void closeMenuItemOnAction() {
+	@FXML protected void closeMenuItemOnAction() {
 		Platform.exit();
 		System.exit(0);
 	}
 
-	@FXML public void checkMenuItemEncryptOnAction() {
+	@FXML protected void checkMenuItemEncryptOnAction() {
 		modeDecrypt.setSelected(false);
 		resetBtnOnMouseClicked();
 		taPlainText.setPromptText("Enter Text:");
 		cryptosystemVariableBtn.setText("Encrypt");
 	}
 
-	@FXML public void checkMenuItemDecryptOnAction() {
+	@FXML protected void checkMenuItemDecryptOnAction() {
 		modeEncrypt.setSelected(false);
 		resetBtnOnMouseClicked();
 		taPlainText.setPromptText("Enter Encrypted Text:");
 		cryptosystemVariableBtn.setText("Decrypt");
 	}
 
-	@FXML public void copyBtnOnMouseClicked() {
+	@FXML protected void copyBtnOnMouseClicked() {
 		content.putString(taCrypticResult.getText());
 	    clipboard.setContent(content);
 		copyBtn.setText("Copied!");
 	}
 
-	@FXML public void pasteBtnOnMouseClicked() {
+	@FXML protected void pasteBtnOnMouseClicked() {
 		taPlainText.setText(clipboard.getString());
 		counterUpdateInspector();
 		pasteBtn.setText("Pasted!");
 	}
 
-	@FXML public void resetBtnOnMouseClicked() {
+	@FXML protected void resetBtnOnMouseClicked() {
 		clearTextAreas();
 		resetCopyPasteBtnText();
 		clearCounters();
@@ -101,21 +101,21 @@ public class CryptographerGUIController {
 		taPlainText.clear();
 		taCrypticResult.clear();
 	}
-	
+
 	private void clearCounters() {
 		clearCharacterCount();
 		clearWordCount();
 	}
-	
+
 	private void clearCharacterCount() {
 		Platform.runLater(() -> charCounter.setText("Character Count:  0"));
 	}
-	
+
 	private void clearWordCount() {
 		Platform.runLater(() -> wordCounter.setText("Word Count:  0"));
 	}
-	
-	@FXML public void counterUpdateInspector() {
+
+	@FXML protected void counterUpdateInspector() {
 		Platform.runLater(() -> charCounter.setText("Character Count:  " + taPlainText.getText().length()));
 		Platform.runLater(() -> {
 			if(taPlainText.getText().isEmpty()) {
@@ -125,12 +125,12 @@ public class CryptographerGUIController {
 			}
 		});
 	}
-	
-	@FXML public void taPlainTextEventFilterContextMenuBlocker() {
-		taPlainText.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);	
+
+	@FXML protected void taPlainTextEventFilterContextMenuBlocker() {
+		taPlainText.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, Event::consume);
 	}
 
-	@FXML public void showHideTextBtnOnMouseClicked() {
+	@FXML protected void showHideTextBtnOnMouseClicked() {
 		if(showHideTextBtn.getText().equals("Hide Text")) { //To hide text
 			showHideTextBtn.setText("Show Text");
 			taPlainText.setStyle("-fx-background-color: #78909C; -fx-text-fill: #78909C;");
@@ -141,12 +141,12 @@ public class CryptographerGUIController {
 		}
 	}
 
-	@FXML public void showAboutMenuOnMouseClicked() {
+	@FXML protected void showAboutMenuOnMouseClicked() {
 		DialogExtension
 		.generateDialog(wrapStackPane, DialogExtension.ABOUT_HEADING, DialogExtension.ABOUT_MESSAGE);
 	}
 
-	@FXML public void saveResultThroughSystem() {
+	@FXML protected void saveResultThroughSystem() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Result to File");
         fileChooser.getExtensionFilters().addAll(
@@ -166,7 +166,7 @@ public class CryptographerGUIController {
 	    }
     }
 
-	@FXML public void cryptosystemVariableBtnOnMouseClicked() {
+	@FXML protected void cryptosystemVariableBtnOnMouseClicked() {
 		try {
 			if(modeEncrypt.isSelected()) {
 				String encryptedResult = cryptographer.encrypt(taPlainText.getText());
@@ -183,11 +183,11 @@ public class CryptographerGUIController {
 	}
 
 	protected static class DialogExtension{
-		
+
 		static final String ERROR_HEADING = "ERROR!";
-		
+
 		static final String ABOUT_HEADING = "ABOUT!";
-		
+
 		static final String ABOUT_MESSAGE = "A simple utility to encrypt any text using AES (Advanced Encryption Standard).\n"
 				+ "Use the Mode menu to swap between encryption and decryption.\n"
 				+ "Decrypted text needs to be properly formatted in order to decrypt properly.\n"
@@ -198,12 +198,12 @@ public class CryptographerGUIController {
 				+ "is public. This tool is meant for personal and insignificant purposes.\n"
 				+ "Please take the aforementioned message into account when utilizing this tool."
 				+ "\n\n Manu Puduvalli v1.0-Alpha";
-		
+
 		static final String DECRYPTION_ERROR_MESSAGE = "The value entered is not a valid decrypted text";
-				
+
 		static void generateDialog(StackPane root, String heading, String staticContent) {
 			JFXDialogLayout content = new JFXDialogLayout();
-			content.setHeading(new Text(heading));					 
+			content.setHeading(new Text(heading));
 			content.setBody(new Text(staticContent));
 			JFXDialog dialog = new JFXDialog(root, content, JFXDialog.DialogTransition.CENTER);
 			JFXButton button = new JFXButton("Close");
@@ -211,11 +211,11 @@ public class CryptographerGUIController {
 			button.setOnAction(e -> dialog.close());
 			content.setActions(button);
 			dialog.show();
-		}	
-		
+		}
+
 		static void generateAlert(String heading, String staticContent){
 			JFXDialogLayout content = new JFXDialogLayout();
-			content.setHeading(new Text(heading));		
+			content.setHeading(new Text(heading));
 			content.setBody(new Text(staticContent));
 			content.setStyle("-fx-background-color: #ef5350");
 			JFXAlert<Void> alert = new JFXAlert<>();
@@ -225,7 +225,7 @@ public class CryptographerGUIController {
 			JFXButton button = new JFXButton("Close");
 			button.setButtonType(ButtonType.RAISED);
 			button.setOnAction(e -> alert.hideWithAnimation());
-			content.setActions(button);			
+			content.setActions(button);
 			alert.showAndWait();
 		}
 	}
