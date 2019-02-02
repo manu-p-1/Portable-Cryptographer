@@ -1,4 +1,4 @@
-package projects.encryptor;
+package projects.encryptor.model;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

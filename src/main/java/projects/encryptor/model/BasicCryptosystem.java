@@ -1,4 +1,4 @@
-package projects.encryptor;
+package projects.encryptor.model;
 
 public interface BasicCryptosystem {
 

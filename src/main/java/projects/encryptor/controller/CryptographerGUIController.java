@@ -1,4 +1,4 @@
-package projects.encryptor.gui;
+package projects.encryptor.controller;
 
 import com.jfoenix.animation.alert.JFXAlertAnimation;
 import com.jfoenix.controls.JFXAlert;
@@ -19,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import projects.encryptor.model.Cryptographer;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -27,8 +28,6 @@ import java.io.PrintWriter;
 
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.NoSuchPaddingException;
-
-import projects.encryptor.Cryptographer;
 
 public class CryptographerGUIController {
 
@@ -51,7 +50,7 @@ public class CryptographerGUIController {
 		}
 	}
 
-	protected void setStageAndSetupListeners(Stage stage) {
+	public void setStageAndSetupListeners(Stage stage) {
 		this.stage = stage;
 	}
 
@@ -197,7 +196,7 @@ public class CryptographerGUIController {
 				+ "WARNING! This application is not meant to be used in any serious programs as the key used for encryption\n"
 				+ "is public. This tool is meant for personal and insignificant purposes.\n"
 				+ "Please take the aforementioned message into account when utilizing this tool."
-				+ "\n\n Manu Puduvalli v1.0-Alpha";
+				+ "\n\n Manu Puduvalli v1.0.0-beta.1";
 
 		static final String DECRYPTION_ERROR_MESSAGE = "The value entered is not a valid decrypted text";
 
