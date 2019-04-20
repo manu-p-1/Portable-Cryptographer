@@ -2,6 +2,7 @@ package projects.encryptor.view;
 
 import projects.encryptor.controller.*;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,11 +15,10 @@ public class PortableCryptographerView extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException {	
-		FXMLLoader fxml_loader = new FXMLLoader(getClass().getResource("CryptographerGUI.fxml"));
-		//System.out.println(getClass().getResource("CryptographerGUI.fxml"));
+		FXMLLoader fxml_loader = new FXMLLoader(
+                new File("src/main/java/projects/encryptor/view/CryptographerGUI.fxml").toURI().toURL());
 		Parent root = (Parent) fxml_loader.load();
-		CryptographerGUIController cgc = (CryptographerGUIController) fxml_loader.getController();
-		cgc.setStageAndSetupListeners(primaryStage);
+		new CryptographerGUIController().setStageAndSetupListeners(primaryStage);
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Portable Cryptographer");

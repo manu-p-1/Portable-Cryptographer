@@ -132,11 +132,11 @@ public class CryptographerGUIController {
 	@FXML protected void showHideTextBtnOnMouseClicked() {
 		if(showHideTextBtn.getText().equals("Hide Text")) { //To hide text
 			showHideTextBtn.setText("Show Text");
-			taPlainText.setStyle("-fx-background-color: #78909C; -fx-text-fill: #78909C;");
+			taPlainText.setStyle("-fx-background-color: #7c899c; -fx-text-fill: #78909C;");
 		}
 		else {
 			showHideTextBtn.setText("Hide Text"); //To show text
-			taPlainText.setStyle("-fx-background-color: #78909C; -fx-text-fill: #424242");
+			taPlainText.setStyle("-fx-background-color: #7c899c; -fx-text-fill: #424242");
 		}
 	}
 
