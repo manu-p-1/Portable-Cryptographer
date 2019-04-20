@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/manu-p-1/Portable-Cryptographer/blob/master/src/main/java/projects/encryptor/gui/Application_Icons/PortableCryptographerLogo.png">
+    <img src="https://github.com/manu-p-1/Portable-Cryptographer/blob/master/Application_Media/PortableCryptographerLogo.png">
 
   <br/>
   <br/>
@@ -33,7 +33,7 @@
 A simple application to securely encrypt text using the Advanced Encryption Standard, or AES for short. :computer: :lock: :key:
 
 ## Updates:
-- **Portable Cryptographer v1.0.0-beta is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
+- **Portable Cryptographer v1.0.0-beta.1 is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
 - Documentation coming soon!
 
 ## Disclaimer:
