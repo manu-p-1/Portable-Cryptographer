@@ -34,7 +34,7 @@ A simple application to securely encrypt text using the Advanced Encryption Stan
 
 ## Updates:
 - **Portable Cryptographer v1.0.0-beta.1 is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
-- Documentation coming soon!
+- Important bug fixes, security updates, and UI features coming the week of 8/5/2019
 
 ## Disclaimer:
 WARNING! This application is not meant to be used in any serious programs as the key used for encryption
