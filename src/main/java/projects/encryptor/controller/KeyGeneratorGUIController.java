@@ -10,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,8 +27,6 @@ public class KeyGeneratorGUIController extends AbstractBaseController{
 	@FXML private JFXButton pstClipBtn;
 	private Stage stage;
 	private String storedSecureKey;
-	private final Clipboard clipboard = Clipboard.getSystemClipboard();
-	private final ClipboardContent content = new ClipboardContent();
 	
 	public KeyGeneratorGUIController() {
 		System.out.println("Key Gen Ctor");
