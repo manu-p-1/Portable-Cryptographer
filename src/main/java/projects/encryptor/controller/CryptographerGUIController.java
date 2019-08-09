@@ -11,52 +11,37 @@ import com.jfoenix.controls.JFXButton.ButtonType;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.CheckMenuItem;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import projects.encryptor.model.Cryptographer;
 import javafx.stage.Stage;
+import projects.encryptor.model.BasicCryptosystem;
+import projects.encryptor.model.CryptographyImplementor;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.NoSuchPaddingException;
-
-public class CryptographerGUIController {
+public class CryptographerGUIController extends AbstractBaseController implements CryptographyImplementor {	
 
 	@FXML private StackPane wrapStackPane;
 	@FXML private CheckMenuItem modeEncrypt, modeDecrypt;
 	@FXML private JFXTextArea taPlainText, taCrypticResult;
 	@FXML private JFXButton copyBtn, pasteBtn, showHideTextBtn, resetBtn, cryptosystemVariableBtn;
 	@FXML private Text charCounter, wordCounter;
-	private Cryptographer cryptographer;
 	private Stage stage;
-	private final Clipboard clipboard = Clipboard.getSystemClipboard();
-	private final ClipboardContent content = new ClipboardContent();
-
-	public CryptographerGUIController() {
-		try {
-			cryptographer = new Cryptographer();
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-			System.err.println(e + " occured.");
-			System.exit(1);
-		}
+	private BasicCryptosystem cpt;
+	
+	@Override
+	public void setupStageAndListeners(Stage p) {
+		this.stage = p;
 	}
-
-	public void setStageAndSetupListeners(Stage stage) {
-		this.stage = stage;
+	
+	@Override
+	public void setupBasicCryptoSystem(BasicCryptosystem bc) {
+		this.cpt = bc;
 	}
-
+	
 	@FXML protected void closeMenuItemOnAction() {
-		Platform.exit();
-		System.exit(0);
+		baseExit();
 	}
 
 	@FXML protected void checkMenuItemEncryptOnAction() {
@@ -146,36 +131,25 @@ public class CryptographerGUIController {
 	}
 
 	@FXML protected void saveResultThroughSystem() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save Result to File");
-        fileChooser.getExtensionFilters().addAll(
-        		new ExtensionFilter("Text Files", "*.txt"),
-        		new ExtensionFilter("Microsoft Word Document", "*.docx"));
-        File file = fileChooser.showSaveDialog(stage);
-        if (file != null) {saveTextToFile(taCrypticResult.getText(), file);}
+		commonFileSystem(wrapStackPane, taCrypticResult);
 	}
-
-	private void saveTextToFile(String content, File file) {
-	    try {
-		    PrintWriter writer = new PrintWriter(file);
-		    writer.println(content);
-		    writer.close();
-	    } catch (IOException IOe) {
-	    	System.err.println(IOe);
-	    }
-    }
 
 	@FXML protected void cryptosystemVariableBtnOnMouseClicked() {
 		try {
 			if(modeEncrypt.isSelected()) {
-				String encryptedResult = cryptographer.encrypt(taPlainText.getText());
+				String encryptedResult = cpt.encrypt(taPlainText.getText(), 
+															    cpt.getSecretKeySpec(),
+														   	    cpt.getCipher());
 				taCrypticResult.setText(encryptedResult);
 			} else {
-				String decryptedResult = cryptographer.decrypt(taPlainText.getText());
+				String decryptedResult = cpt.decrypt(taPlainText.getText(),
+												   				cpt.getSecretKeySpec(),
+											   					cpt.getCipher());
 				taCrypticResult.setText(decryptedResult);
 			}
 			resetCopyPasteBtnText();
 		} catch (Exception e) {
+			e.printStackTrace();
 			DialogExtension
 			.generateAlert(DialogExtension.ERROR_HEADING, DialogExtension.DECRYPTION_ERROR_MESSAGE);
 		}

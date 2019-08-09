@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7c899c;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="projects.encryptor.controller.KeyGeneratorGUIController">
+   <children>
+      <Text layoutX="55.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generate Key or Enter Key" textAlignment="CENTER" wrappingWidth="489.6708984375">
+         <font>
+            <Font name="Calibri Bold" size="32.0" />
+         </font>
+      </Text>
+      <JFXButton fx:id="generateBtn" buttonType="RAISED" focusTraversable="false" layoutX="14.0" layoutY="334.0" onAction="#generateBtnOnAction" prefHeight="51.0" prefWidth="130.0" style="-fx-background-color: #5c4a4a;" text="Generate" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="saveBtn" buttonType="RAISED" focusTraversable="false" layoutX="315.0" layoutY="334.0" onAction="#saveBtnOnAction" prefHeight="51.0" prefWidth="130.0" style="-fx-background-color: #424242;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="enterBtn" buttonType="RAISED" layoutX="456.0" layoutY="334.0" onAction="#enterBtnOnAction" prefHeight="51.0" prefWidth="130.0" style="-fx-background-color: #424242;" text="Enter" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </JFXButton>
+      <Text layoutX="16.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use the Crytographer, a secure key is needed in order to securely encrypt and decrypt pieces of text. To enter a prexisting key, copy it to the textfield below. Otherwise, click generate to create a new secure key. Save this key for later." textAlignment="CENTER" wrappingWidth="571.0000008940697">
+         <font>
+            <Font name="Calibri Italic" size="17.0" />
+         </font>
+      </Text>
+      <JFXPasswordField fx:id="keyTf" focusColor="#5c4a4a" layoutX="16.0" layoutY="188.0" prefHeight="25.0" prefWidth="571.0" promptText="Key: " />
+      <JFXButton fx:id="cpyClipBtn" buttonType="RAISED" focusTraversable="false" layoutX="14.0" layoutY="227.0" onAction="#cpyClipBtnOnAction" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: #424242;" text="Copy to Clipboard" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="pstClipBtn" buttonType="RAISED" focusTraversable="false" layoutX="152.0" layoutY="227.0" onAction="#pstClipBtnOnAction" prefHeight="32.0" prefWidth="146.0" style="-fx-background-color: #424242;" text="Paste from Clipboard" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

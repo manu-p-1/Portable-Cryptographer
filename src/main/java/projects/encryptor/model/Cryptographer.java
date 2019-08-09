@@ -1,51 +1,62 @@
 package projects.encryptor.model;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Cryptographer implements BasicCryptosystem {
 
-	private boolean isEncrpyted;
- 	private final String key = "2s5v8x/A?D(G+KbPeShVmYq3t6w9z$B&"; //Randomly generated keys to come later
- 	private final Key aesKey;
- 	private final Cipher cipher;
+	private boolean encrpytionStatus;
+ 	private String key = "PLACEHOLDER"; 
+ 	private Key secretKey;
+ 	private Cipher cipher;
 
-	public Cryptographer() throws NoSuchAlgorithmException, NoSuchPaddingException {
-		isEncrpyted = false;
-		aesKey = new SecretKeySpec(key.getBytes(), "AES");
-		cipher = Cipher.getInstance("AES");
+	public boolean getEncryptionStatus() {
+		return encrpytionStatus;
+	}
+	
+	public void setEncryptionStatus(boolean status) {
+		this.encrpytionStatus = status;
+	}
+	
+	public void setSecretKeyFromString(String keystr, String algo, String messageDigest) throws NoSuchAlgorithmException, IOException {
+		this.secretKey = generateKeySpec(keystr, algo, messageDigest);
+	}
+	
+	@Override
+	public Key getSecretKeySpec() {
+		return secretKey;
+	}
+	
+	@Override
+	public Cipher getCipher() {
+		return cipher;
+	}
+	
+	@Override
+	public void setCipher(Cipher cipher) {
+		this.cipher = cipher;
+	}
+	
+	@Override
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
+	@Override
+	public String getKey() {
+		return this.key;
+	}
+	
+	private static SecretKeySpec generateKeySpec(String keystr, String algo, String messageDigest) throws NoSuchAlgorithmException, IOException {
+		byte[] btMess = keystr.getBytes(BasicCryptosystem.SUPPORTED_CHARSET);
+		MessageDigest md = MessageDigest.getInstance(messageDigest);
+		byte[] btDig = md.digest(btMess);
+		return new SecretKeySpec(btDig, algo);
 	}
 
-	public String encrypt(String plainTxt) throws InvalidKeyException, IllegalBlockSizeException,
-		BadPaddingException, UnsupportedEncodingException {
-		isEncrpyted = true;
-		cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-		byte[] encrypted = cipher.doFinal(plainTxt.getBytes("UTF-8"));
-		String encodedVal = new BASE64Encoder().encode(encrypted);
-		return new String(encodedVal);
-	}
-
-	public String decrypt(String encrypted) throws InvalidKeyException, IllegalBlockSizeException,
-		BadPaddingException, IOException {
-		isEncrpyted = false;
-		cipher.init(Cipher.DECRYPT_MODE, aesKey);
-		byte[] decodedVal = new BASE64Decoder().decodeBuffer(encrypted);
-		return new String(cipher.doFinal(decodedVal));
-	}
-
-	public boolean isEncrypted() {
-		return isEncrpyted;
-	}
 }
