@@ -23,6 +23,7 @@ public class Cryptographer implements BasicCryptosystem {
 		this.encrpytionStatus = status;
 	}
 	
+	@Override
 	public void setSecretKeyFromString(String keystr, String algo, String messageDigest) throws NoSuchAlgorithmException, IOException {
 		this.secretKey = generateKeySpec(keystr, algo, messageDigest);
 	}
