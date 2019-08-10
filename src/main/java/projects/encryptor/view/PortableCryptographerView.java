@@ -4,7 +4,6 @@ import projects.encryptor.controller.*;
 import projects.encryptor.model.BasicCryptosystem;
 import projects.encryptor.model.Cryptographer;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,8 +27,7 @@ public class PortableCryptographerView extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws IOException, NoSuchAlgorithmException, NoSuchPaddingException {	
-		FXMLLoader fxml_loader = new FXMLLoader(
-                new File("src/main/java/projects/encryptor/view/CryptographerGUI.fxml").toURI().toURL());
+		FXMLLoader fxml_loader = new FXMLLoader(getClass().getResource("CryptographerGUI.fxml"));
 		Parent root = (Parent) fxml_loader.load();		
 		CryptographerGUIController cgc = fxml_loader.getController();
 		
@@ -41,8 +39,7 @@ public class PortableCryptographerView extends Application {
 		primaryStage.getIcons().add(new Image(
 				"/projects/encryptor/view/Application_Icons/mainApplicationIcon.png"));
 		
-		FXMLLoader fxml_loader_key = new FXMLLoader(
-                new File("src/main/java/projects/encryptor/view/KeyGeneratorGUI.fxml").toURI().toURL());
+		FXMLLoader fxml_loader_key = new FXMLLoader(getClass().getResource("KeyGeneratorGUI.fxml"));
 		Parent root2 = (Parent) fxml_loader_key.load();
 		KeyGeneratorGUIController kgc = fxml_loader_key.getController();		
 		Stage keyStage = kgc.generateDialog(primaryStage, root2);
