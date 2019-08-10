@@ -28,7 +28,7 @@
             <Font name="Calibri Bold" size="24.0" />
          </font>
       </JFXButton>
-      <Text layoutX="16.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use the Crytographer, a secure key is needed in order to securely encrypt and decrypt pieces of text. To enter a prexisting key, copy it to the textfield below. Otherwise, click generate to create a new secure key. Save this key for later." textAlignment="CENTER" wrappingWidth="571.0000008940697">
+      <Text layoutX="16.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To use the Crytographer, a secure secret key is needed in order to securely encrypt and decrypt pieces of text. To enter a prexisting key, copy it to the textfield below. Otherwise, click generate to create a new secure key. Save this key for later." textAlignment="CENTER" wrappingWidth="571.0000008940697">
          <font>
             <Font name="Calibri Italic" size="17.0" />
          </font>
