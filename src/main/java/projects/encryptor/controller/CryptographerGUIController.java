@@ -178,9 +178,10 @@ public class CryptographerGUIController extends AbstractController implements Cr
 				+ "Use the File menu to exit the application or save the encrypted or decrypted result as a text file.\n"
 				+ "Copy Result copies the encrypted or decrypted result to the systems clipboard.\n"
 				+ "Paste to Field pastes any text on the systems clipboard to the text box.\n\n"
-				+ "WARNING! This application is not meant to be used in any serious programs as the key used for encryption\n"
-				+ "is public. This tool is meant for personal and insignificant purposes.\n"
-				+ "Please take the aforementioned message into account when utilizing this tool."
+				+ "WARNING! Although the program uses a 256 bit AES key with an ECB block cipher mode,\n"
+				+ "this application is not meant to be used in any serious programs. It does not take into consideration\n"
+				+ "hardware integration, initialization vectors, or Message Authentication (MAC & HMAC) This tool is meant\n"
+				+ "for personal and insignificant purposes. Please take the aforementioned message into account when utilizing this tool."
 				+ "\n\n Manu Puduvalli v1.0.0-beta.1";
 
 		static final String DECRYPTION_ERROR_MESSAGE = "The value entered is not a valid decrypted text";
