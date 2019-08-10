@@ -20,14 +20,21 @@ import javafx.stage.Stage;
 import projects.encryptor.model.BasicCryptosystem;
 import projects.encryptor.model.CryptographyImplementor;
 
-public class CryptographerGUIController extends AbstractBaseController implements CryptographyImplementor {	
+/**
+ * The main Controller for the Portable Cryptographer including the GUI
+ * elements for input, encrpytion, and decryption.
+ * 
+ * @author Manu Puduvalli
+ *
+ */
+public class CryptographerGUIController extends AbstractController implements CryptographyImplementor {	
 
 	@FXML private StackPane wrapStackPane;
 	@FXML private CheckMenuItem modeEncrypt, modeDecrypt;
 	@FXML private JFXTextArea taPlainText, taCrypticResult;
 	@FXML private JFXButton copyBtn, pasteBtn, showHideTextBtn, resetBtn, cryptosystemVariableBtn;
 	@FXML private Text charCounter, wordCounter;
-	private Stage stage;
+	@SuppressWarnings("unused") private Stage stage; 
 	private BasicCryptosystem cpt;
 	
 	@Override
@@ -61,24 +68,18 @@ public class CryptographerGUIController extends AbstractBaseController implement
 	@FXML protected void copyBtnOnMouseClicked() {
 		content.putString(taCrypticResult.getText());
 	    clipboard.setContent(content);
-		copyBtn.setText("Copied!");
+		buttonTextTimer(copyBtn, "Copy Result", "Copied!");
 	}
 
 	@FXML protected void pasteBtnOnMouseClicked() {
 		taPlainText.setText(clipboard.getString());
 		counterUpdateInspector();
-		pasteBtn.setText("Pasted!");
+		buttonTextTimer(pasteBtn, "Paste to Field", "Pasted!");
 	}
 
 	@FXML protected void resetBtnOnMouseClicked() {
 		clearTextAreas();
-		resetCopyPasteBtnText();
 		clearCounters();
-	}
-
-	private void resetCopyPasteBtnText() {
-		copyBtn.setText("Copy Result");
-		pasteBtn.setText("Paste to Field");
 	}
 
 	private void clearTextAreas() {
@@ -115,13 +116,24 @@ public class CryptographerGUIController extends AbstractBaseController implement
 	}
 
 	@FXML protected void showHideTextBtnOnMouseClicked() {
+		/*
+		 * If you read this method, let me stop you there. I know what you're thinking.
+		 * Did he just mask text using CSS?! What a charlatan!!! I know. I know. It's a 
+		 * cardinal sin of programming security. The main problem is that TextAreas have 
+		 * no inbuilt way mask text. I've tried implementing a changelistner but that
+		 * really doesn't work either. With a changelistener, it listens to any change, so,
+		 * if you were to append a bullet character to the TextArea, it would fire the listener.
+		 * Don't understand what I'm saying? That's ok. It's a really difficult problem that
+		 * I don't feel like doing for this project specifically. Regardless, if you found
+		 * a solution, let me know in the comments for this GitHub page.
+		 */
 		if(showHideTextBtn.getText().equals("Hide Text")) { //To hide text
-			showHideTextBtn.setText("Show Text");
+			showHideTextBtn.setText("Show Text");					
 			taPlainText.setStyle("-fx-background-color: #7c899c; -fx-text-fill: #78909C;");
 		}
 		else {
 			showHideTextBtn.setText("Hide Text"); //To show text
-			taPlainText.setStyle("-fx-background-color: #7c899c; -fx-text-fill: #424242");
+			taPlainText.setStyle("-fx-background-color: #7c899c; -fx-text-fill: #78909C;");
 		}
 	}
 
@@ -147,7 +159,6 @@ public class CryptographerGUIController extends AbstractBaseController implement
 											   					cpt.getCipher());
 				taCrypticResult.setText(decryptedResult);
 			}
-			resetCopyPasteBtnText();
 		} catch (Exception e) {
 			e.printStackTrace();
 			DialogExtension

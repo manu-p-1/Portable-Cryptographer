@@ -18,6 +18,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
+/**
+ * Loads the FXML for the Controllers and launches the program.
+ * 
+ * @author Manu Puduvalli
+ *
+ */
 public class PortableCryptographerView extends Application {
 	
 	@Override
@@ -49,7 +55,8 @@ public class PortableCryptographerView extends Application {
 		cryptographer.setKey(kgc.getStoredSecureKey());
 		cryptographer.setSecretKeyFromString(cryptographer.getKey(), 
 				BasicCryptosystem.ALGORITHM_AES, 
-				BasicCryptosystem.MESSAGE_DIGEST_SHA256);
+				BasicCryptosystem.MESSAGE_DIGEST_SHA256,
+				BasicCryptosystem.CHARSET_UTF8);
 		cgc.setupBasicCryptoSystem(cryptographer);
 	}
 	
