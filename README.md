@@ -18,7 +18,7 @@
   </a>
 
   <a href="https://www.java.com/en/download/">
-    <img src="https://img.shields.io/badge/Java%20Version-%3E%3D%201.8.0%20%7C%20%3C%3D%2010.0.2-orange.svg?style=for-the-badge">
+    <img src="https://img.shields.io/badge/Java%20Version-%3E%3D%201.8.0%20-orange.svg?style=for-the-badge">
   </a>
 
   <a href="https://github.com/manu-p-1/Portable-Cryptographer/commits/master">
