@@ -26,13 +26,12 @@
   <a href="https://github.com/manu-p-1/Portable-Cryptographer/commits/master">
     <img src="https://img.shields.io/github/commits-since/manu-p-1/Portable-Cryptographer/v1.0.0-alpha.svg?style=for-the-badge">
   </a>
-
 </p>
+<h3 align="center"><b>THIS PROJECT IS NO LONGER BEING MAINTAINED<b></h3>
 
 <br/>
-<br/>
 
-A simple application to securely encrypt text using the Advanced Encryption Standard, or AES for short. :computer: :lock: :key:
+Portable Cryptographer is a simple application to securely encrypt text using the Advanced Encryption Standard, or AES for short. :computer: :lock: :key:
 
 ## Updates:
 - **Portable Cryptographer v1.0.0 is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
