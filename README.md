@@ -37,7 +37,7 @@ Portable Cryptographer is a simple application to securely encrypt text using th
 - **Portable Cryptographer v1.0.0 is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
 
 ## Disclaimer:
-**WARNING!** Do not utilize for enterprise ("real-world") use cases. This is solely intended for personal use for non-sensitive data.
+**WARNING!** Do not utilize for enterprise ("real world") use cases. This is solely intended for personal use for non-sensitive data.
 
 ## Media:
 <p align="center">
