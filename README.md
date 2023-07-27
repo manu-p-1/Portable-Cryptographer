@@ -37,7 +37,7 @@ Portable Cryptographer is a simple application to securely encrypt text using th
 - **Portable Cryptographer v1.0.0 is out for release!** at https://github.com/manu-p-1/Portable-Cryptographer/releases
 
 ## Disclaimer:
-**WARNING!** Although the program uses a 256 bit AES key with an ECB block cipher mode, this application is not meant to be used in any serious programs. It does not take into consideration hardware integration, initialization vectors, or Message Authentication (MAC & HMAC) This tool is meant for personal and insignificant purposes. Please take the aforementioned message into account when utilizing this tool.
+**WARNING!** Do not utilize for enterprise ("real-world") use cases. This is solely intended for personal use for non-sensitive data.
 
 ## Media:
 <p align="center">
